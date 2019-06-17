@@ -37,21 +37,35 @@ let style = {
 }
 
 class CreateTaskModal {
-    constructor() {
-
+    constructor(allowCreate) {
+        this.allowCreate = allowCreate;
     }
 
-    render(){
+    render() {
         let modal = document.createElement('div');
         let modalContent = document.createElement('div');
         let closeSpan = document.createElement('span');
         let btnCreateTask = document.createElement('button');
         let titleAddTask = document.createElement('h1');
+        let titleTask = document.createElement('p');
+        let inputTaskName = document.createElement('input');
+        let titleProject = document.createElement('p');
+        let inputProjectName = document.createElement('input');
 
         modal.style = style.modalStyle;
         modalContent.style = style.modalContentStyle;
         btnCreateTask.style = style.btnSumbitCreateStyle;
         closeSpan.style = style.closeSpanStyle;
+
+        titleAddTask.textContent = 'Add New Task';
+        titleProject.textContent = 'Project Title:';
+        inputProjectName.name = 'txtProjectTitle';
+        inputProjectName.type = 'text';
+
+        titleTask.textContent = 'Task Title:';
+        inputTaskName.name = 'txtTaskTitle';
+        inputTaskName.type = 'text';
+
         closeSpan.onmouseover = () => {
             closeSpan.style = style.closeSpanStyleHover;
         };
@@ -60,7 +74,15 @@ class CreateTaskModal {
             closeSpan.style = style.closeSpanStyleHover;
         }
 
-        return;
+        modalContent.append(closeSpan);
+        modalContent.append(titleAddTask);
+        modalContent.append(titleProject);
+        modalContent.append(inputProjectName);
+        modalContent.append(titleTask);
+        modalContent.append(inputTaskName);
+        modalContent.append(btnCreateTask);
+        modal.append(modalContent);
+        return modal;
     }
 
 }
