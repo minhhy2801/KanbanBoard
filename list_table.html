@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div style="display: flex; width: 100%; align-items: stretch; ">
+        <div class="div--task--state">
+            <div>
+                <button class="btn--new--task" id="btnOpenModalNewTask">+</button>
+                <h1>Todo <span id="numOfTodo">(0)</span></h1>
+                <hr>
+            </div>
+            <div class="div--task--container">
+                <div class="div--task--info">1</div>
+                <div class="div--task--info">2</div>
+                <div class="div--task--info">2</div>
+                <div class="div--task--info">2</div>
+                <div class="div--task--info">3</div>
+            </div>
+        </div>
+        <div class="div--task--state">
+            <div>
+                <h1>Implement <span id="numOfImplement">(0)</span></h1>
+                <hr>
+            </div>
+            <div class="div--task--container"></div>
+        </div>
+        <div class="div--task--state">
+            <div>
+                <h1>Testing <span id="numOfTesting">(0)</span></h1>
+                <hr>
+            </div>
+            <div class="div--task--container"></div>
+        </div>
+        <div class="div--task--state">
+            <div>
+                <h1>Done <span id="numOfDone">(0)</span></h1>
+                <hr>
+            </div>
+            <div class="div--task--container"></div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="divCreateModal" class="modal--create--task">
+
+        <!-- Modal content -->
+        <div class="modal-content--create--task">
+            <span id="closeCreateModal" class="close--div--create--task--modal">&times;</span>
+            <h1>Add New Task</h1>
+            <p>Project Title: </p>
+            <input type="text" name="txtProjectTitle" />
+            <p>Task Title</p>
+            <input type="text" name="txtTaskTitle" />
+            <p></p><br>
+            <button type="submit" id="btnCreateTask">Submit</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
