@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .drag-box {
+            background-color: lightgray;
+            float: right;
+            width: 120px;
+            min-height: 50px;
+            padding-bottom: 30px;
+            height: auto;
+            margin: 30px;
+        }
+
+        .drag-task {
+            background-color: white;
+            margin: 15px;
+        }
+
+        .drop-active {
+            border: 1px dashed red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="drop-target">
+        <div class="drag-box">
+            <div class="drag-card">
+                <div draggable="true" id="task1" class="drag-task">Test Card 1</div>
+            </div>
+            <div class="drag-card">
+                <div draggable="true" id="task2" class="drag-task">Test Card 2</div>
+            </div>
+            <div class="drag-card">
+                <div draggable="true" id="task3" class="drag-task">Test Card 3</div>
+            </div>
+        </div>
+        <div class="drag-box">
+        </div>
+        <div class="drag-box">
+        </div>
+    </div>
+
+    <script>
+        var dropTarget = document.querySelector(".drop-target");
+        var draggables = document.querySelectorAll(".drag-task");
+
+        // Tells the other side what data is being passed (e.g. the ID is targeted)
+        draggables.forEach(item => {
+            item.addEventListener("dragstart", function (ev) {
+                ev.dataTransfer.setData("srcId", ev.target.id);
+            });
+        })
+        // The end destination, prevent browsers default drag and drop (disabling breaks feature)
+        // because it's disabled by browsers by default
+        dropTarget.addEventListener('dragover', function (ev) {
+            ev.preventDefault();
+        });
+        // End destination where item is dropped into
+        dropTarget.addEventListener('drop', function (ev) {
+            ev.preventDefault();
+            let target = ev.target;
+            let droppable = target.classList.contains('drag-box');
+            let srcId = ev.dataTransfer.getData("srcId");
+
+            if (droppable) {
+                ev.target.appendChild(document.getElementById(srcId));
+            }
+        });
+
+    </script>
+</body>
+
+</html>

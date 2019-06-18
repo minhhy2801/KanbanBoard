@@ -1,54 +1,56 @@
-(function() {
+(function () {
     "use strict";
+    
+    let url = window.location.href;
+    if (url.includes('view=2068')) {
 
-    kintone.events.on('app.record.index.show', function(event) {
-        var btnOpenModal = document.getElementById("btnOpenModalNewTask");
-        var modalNewTask = document.getElementById("divCreateModal");
-        var closeModalNewTask = document.getElementById("closeCreateModal");
-        var btnSubmitCreateTask = document.getElementById("btnCreateTask");
+        kintone.events.on('app.record.index.show', function (event) {
+            var btnOpenModal = document.getElementById("btnOpenModalNewTask");
+            var modalNewTask = document.getElementById("divCreateModal");
+            var closeModalNewTask = document.getElementById("closeCreateModal");
+            var btnSubmitCreateTask = document.getElementById("btnCreateTask");
 
-        btnOpenModal.onclick = function() {
-            modalNewTask.style.display = "block";
-        }
+            btnOpenModal.onclick = function () {
+                modalNewTask.style.display = "block";
+            }
 
-        closeModalNewTask.onclick = function() {
-            modalNewTask.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modalNewTask) {
+            closeModalNewTask.onclick = function () {
                 modalNewTask.style.display = "none";
             }
-        }
 
-        btnSubmitCreateTask.onclick = function() {
-            var txtProjectTitle = document.getElementsByName("txtProjectTitle")[0].value;
-            var txtTaskTitle = document.getElementsByName("txtTaskTitle")[0].value;
-            createTask(txtProjectTitle, txtTaskTitle).then(resp => {
-                swal({
-                    title: "Success!",
-                    text: "Your task added in todo list",
-                    icon: "success",
-                    button: "Close",
+            window.onclick = function (event) {
+                if (event.target == modalNewTask) {
+                    modalNewTask.style.display = "none";
+                }
+            }
 
-                }).then(value => {
-                    window.location.reload(true);
+            btnSubmitCreateTask.onclick = function () {
+                var txtProjectTitle = document.getElementsByName("txtProjectTitle")[0].value;
+                var txtTaskTitle = document.getElementsByName("txtTaskTitle")[0].value;
+                createTask(txtProjectTitle, txtTaskTitle).then(resp => {
+                    swal({
+                        title: "Success!",
+                        text: "Your task added in todo list",
+                        icon: "success",
+                        button: "Close",
+
+                    }).then(value => {
+                        window.location.reload(true);
+                    });
+                    modalNewTask.style.display = "none";
+
+                }).catch(err => {
+                    swal({
+                        title: "Fail!",
+                        text: " Check task information and try again!",
+                        icon: "error",
+                        button: "Close",
+                    });
                 });
-                modalNewTask.style.display = "none";
 
-            }).catch(err => {
-                swal({
-                    title: "Fail!",
-                    text: " Check task information and try again!",
-                    icon: "error",
-                    button: "Close",
-                });
-            });
-
-        }
-
-
-    })
+            }
+        })
+    }
 
     function createTask(projectTitle, taskTitle) {
         let body = setATask(projectTitle, taskTitle);

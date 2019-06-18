@@ -7,10 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .div--task--info {
+            background-color: white;
+            margin: 15px;
+        }
+
+        .drop-active {
+            border: 1px dashed red;
+        }
+    </style>
 </head>
 
 <body>
-    <div style="display: flex; width: 100%; align-items: stretch; ">
+
+    <div class="drop-target" style="display: flex; width: 100%; align-items: stretch; ">
         <div class="div--task--state">
             <div>
                 <button class="btn--new--task" id="btnOpenModalNewTask">+</button>
@@ -18,11 +29,8 @@
                 <hr>
             </div>
             <div class="div--task--container">
-                <div class="div--task--info">1</div>
-                <div class="div--task--info">2</div>
-                <div class="div--task--info">2</div>
-                <div class="div--task--info">2</div>
-                <div class="div--task--info">3</div>
+                <div class="div--task--info" id="item1" draggable="true">1</div>
+                <div class="div--task--info" id="item2" draggable="true">2</div>
             </div>
         </div>
         <div class="div--task--state">
@@ -30,7 +38,10 @@
                 <h1>Implement <span id="numOfImplement">(0)</span></h1>
                 <hr>
             </div>
-            <div class="div--task--container"></div>
+            <div class="div--task--container">
+                <div class="div--task--info" id="item3" draggable="true">7</div>
+                <div class="div--task--info" id="item4" draggable="true">8</div>
+            </div>
         </div>
         <div class="div--task--state">
             <div>
@@ -64,6 +75,46 @@
         </div>
 
     </div>
+
+    <script>
+        var dropTarget = document.querySelector(".drop-target");
+        var draggables = document.querySelectorAll(".div--task--info");
+
+        draggables.forEach(item => {
+            item.addEventListener("dragstart", function (ev) {
+                console.log('start');
+                ev.dataTransfer.setData("srcId", ev.target.id);
+            });
+        })
+
+        dropTarget.addEventListener('dragover', function (ev) {
+            console.log('drag');
+            
+            ev.preventDefault();
+        });
+
+        dropTarget.addEventListener('drop', function (ev) {
+            ev.preventDefault();
+            let target = ev.target;
+            let hasTask = target.classList.contains('div--task--info');
+            let srcId = ev.dataTransfer.getData("srcId");
+            // console.log('target ' + target.className);
+            // console.log(hasTask);
+
+            if (hasTask) {
+                // console.log("fill");
+                // console.log(target.parentNode.className);
+
+                target.parentNode.append(document.getElementById(srcId));
+            } else {
+                // console.log("rong");
+                // console.log(target.querySelectorAll('.div--task--state .div--task--container'));
+                target.querySelectorAll('.div--task--state .div--task--container')[0].append(document.getElementById(srcId))
+            }
+
+        });
+
+    </script>
 </body>
 
 </html>
