@@ -14,9 +14,10 @@
                     console.log(err);
                 });
             }
-        });
-
+         
+        })
     }
+    //================
 
     function setTaskOnBoards(totalRecords, records, index, idTitle) {
         for (let i = 0; i < totalRecords; i++) {
@@ -24,7 +25,7 @@
             var linkDeleteTask = document.createElement('a');
 
             taskDivEl.className = 'div--task--info';
-            taskDivEl.id = idTitle + i;
+            taskDivEl.id = records[i].$id.value;
             taskDivEl.draggable = true;
             taskDivEl.innerText = "[" + records[i].num_progress.value + "%] Project Title: " +
                 records[i].txt_projectTitle.value + '\n Task Name: ' +
@@ -38,7 +39,13 @@
 
             taskDivEl.appendChild(linkDeleteTask);
             document.getElementsByClassName('div--task--container')[index].appendChild(taskDivEl);
+
+            taskDivEl.addEventListener("dragstart", function (ev) {
+
+                ev.dataTransfer.setData("text", ev.target.id);
+            });
         }
+
         document.getElementById(idTitle).innerText = '(' + totalRecords + ')';
     }
 
@@ -59,7 +66,6 @@
             .then((willDelete) => {
 
                 if (willDelete) {
-
                     deleteTask(recordId);
 
                     swal("Your task has been deleted!", {
@@ -86,5 +92,6 @@
 
         return kintone.api(kintone.api.url('/k/v1/records', true), 'DELETE', body);
     }
+
 
 })();
