@@ -17,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "babel-polyfill": "^6.26.0",
     "local-web-server": "^3.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

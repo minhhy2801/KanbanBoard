@@ -1,4 +1,5 @@
 import Task from "../../Task/container";
+import { setStyle } from "../../../util/style";
 
 let style = {
     listTasksStyle: {
@@ -16,19 +17,12 @@ class ListTasks {
         this.listTasks = listTasks;
     }
 
-    // viewTaskDetail = (taskId) => {
-    //     console.log("View Task " + taskId)
-    // }
-
-    // deleteTask = (taskId) => {
-    //     console.log("Delete Task " + taskId)
-    // }
-
     render() {
         let listTasks = document.createElement('div');
-        listTasks.style = style.listTasksStyle;
+        setStyle(listTasks, style.listTasksStyle);
+
         this.listTasks.forEach(objTask => {
-            let task = new Task(objTask.numProgress, objTask.projectTitle, objTask.taskTitle, objTask.id);
+            let task = new Task(objTask.num_progress.value, objTask.txt_projectTitle.value, objTask.txt_taskTitle.value, objTask.$id.value);
             listTasks.append(task.render());
         });
         return listTasks;

@@ -1,3 +1,6 @@
+import { setStyle } from "../../../util/style";
+import CreateTaskModal from "../../App/components/CreateTaskModal";
+
 let style = {
     btnNewTaskStyle: {
         float: 'right',
@@ -10,28 +13,35 @@ let style = {
 }
 
 class Header {
-    constructor(totalCount, stateName, onClick, allowCreate) {
+    constructor(totalCount, stateName, onClickOpenModal) {
         this.totalCount = totalCount;
         this.stateName = stateName;
-        this.onClick = onClick;
-        this.allowCreate = allowCreate;
+        this.onClickOpenModal = onClickOpenModal;
+        this.headerEl = document.createElement('div');
+    }
+
+    onClick() {
+        this.onClickOpenModal();
     }
 
     render() {
         let headerEl = document.createElement('div');
-        
-        if (this.allowCreate) {
+
+        if (this.stateName === 'Todo') {
             let btnNewTaskEl = document.createElement('button');
-            btnNewTaskEl.style = style.btnNewTaskStyle;
+
+            setStyle(btnNewTaskEl, style.btnNewTaskStyle);
             btnNewTaskEl.innerText = '+';
-            btnNewTaskEl.onclick = this.onClick;
+            btnNewTaskEl.onclick = this.onClick.bind(this);
             headerEl.append(btnNewTaskEl);
         }
 
         let titleContentEl = document.createElement('h1');
-        titleContentEl.textContent = this.stateName + ' (' + this.stateName + ')';
+        titleContentEl.textContent = this.stateName + ' (' + this.totalCount + ')';
         headerEl.append(titleContentEl);
-
+        headerEl.append(document.createElement('hr'));
+        
+        this.headerEl = headerEl
         return headerEl;
     }
 }

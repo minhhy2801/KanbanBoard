@@ -1,5 +1,8 @@
 import Header from "./Header";
 import ListTasks from "./ListTasks";
+import CreateTaskModal from "../../App/components/CreateTaskModal";
+import { setStyle } from "../../../util/style";
+
 
 let style = {
     boardStyle: {
@@ -14,24 +17,26 @@ let style = {
 }
 
 class Board {
-    constructor(listTasks, header, allowCreate, onClick) {
+    constructor(listTasks, header, openModal) {
         this.listTasks = listTasks;
         this.header = header;
-        this.allowCreate = allowCreate;
-        this.onClick = onClick;
+        this.openModal = openModal;
     }
 
-    createTask = () => {
-        if (onClick) {
-            this.onClick(this.header)
+    onClick() {
+        if (!this.model) {
+            let model = new CreateTaskModal(this.stateName);
+            this.model = model;
+            document.getElementById('app').appendChild(this.model.render())
         }
+        this.model.isVisible(true);
     }
-
+    
     render() {
         let board = document.createElement('div');
+        setStyle(board, style.boardStyle);
 
-        board.style = style.boardStyle;
-        let headerEl = new Header(this.listTasks.length, this.header, this.createTask, this.allowCreate);
+        let headerEl = new Header(this.listTasks.length, this.header, this.onClick);
         let listTasks = new ListTasks(this.listTasks);
 
         board.append(headerEl.render());
