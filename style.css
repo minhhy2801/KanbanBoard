@@ -87,6 +87,7 @@
     border: 1px solid white;
     color: white;
     height: 50px;
+    margin-left: 40%;
 }
 
 .link--delete--task {

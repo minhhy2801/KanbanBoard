@@ -1,3 +1,4 @@
+
 (function () {
     "use strict";
     let url = window.location.href;
@@ -93,7 +94,7 @@
         let body = { app: 2, id: recordId };
         return kintone.api(kintone.api.url('/k/v1/record', true), 'GET', body);
     }
-    
+
     function getRecordsByStatus(status) {
         var queryStatus = 'rb_status in ("' + status + '")';
         var body = { app: 2, query: queryStatus, totalCount: true };
@@ -111,5 +112,34 @@
 
         linkDeleteTask.onclick = function () { processDeleteTask(recordId) };
         document.getElementById(recordId).append(linkDeleteTask);
+    }
+
+    function processDeleteTask(recordId) {
+        window.event.stopImmediatePropagation();
+
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete this task",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+
+                if (willDelete) {
+                    deleteTask(recordId);
+
+                    swal("Your task has been deleted!", {
+                        icon: "success",
+                    }).then(value => {
+                        window.location.reload(true);
+                    });
+                }
+            });
+    }
+    function deleteTask(recordId) {
+        var body = { app: 2, ids: [recordId] };
+
+        return kintone.api(kintone.api.url('/k/v1/records', true), 'DELETE', body);
     }
 })();
