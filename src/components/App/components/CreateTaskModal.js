@@ -24,13 +24,17 @@ let style = {
         backgroundColor: 'brown',
         border: '1px solid white',
         color: 'white',
-        height: '50px'
+        marginRight: '5%',
+        marginLeft: '30%',
+        height: '50px',
+        marginTop: '2%'
+
     },
     btnCancelStyle: {
         backgroundColor: 'gray',
         border: '1px solid white',
         color: 'white',
-        height: '50px'
+        height: '50px',
     },
     closeSpanStyle: {
         color: '#aaa',
@@ -48,6 +52,9 @@ let style = {
     },
     modalShowStyle: {
         display: 'block'
+    },
+    inputWidthStyle: {
+        width: '100%',
     }
 }
 
@@ -122,24 +129,21 @@ class CreateTaskModal {
         let titleProject = document.createElement('p');
         let inputProjectName = document.createElement('input');
 
-        // btnCreateTask.id = 'btnOpenModalNewTask';
-        // modal.id = 'modalNewTask';
-        // closeSpan.className = 'close-modal';
-        // btnCancelCreateTask.className = 'close-modal';
-
         setStyle(modal, style.modalStyle);
         setStyle(modalContent, style.modalContentStyle);
-        setStyle(btnCancelCreateTask, style.btnCancelCreateTask);
+        setStyle(btnCancelCreateTask, style.btnCancelStyle);
         setStyle(btnCreateTask, style.btnSumbitCreateStyle);
         setStyle(closeSpan, style.closeSpanStyle);
+        setStyle(inputProjectName, style.inputWidthStyle);
+        setStyle(inputTaskName, style.inputWidthStyle);
 
         closeSpan.textContent = 'X';
         titleAddTask.textContent = 'Add New Task';
-        titleProject.textContent = 'Project Title:';
+        titleProject.textContent = 'Project Name:';
         inputProjectName.name = 'txtProjectTitle';
         inputProjectName.type = 'text';
 
-        titleTask.textContent = 'Task Title:';
+        titleTask.textContent = 'Task Name:';
         inputTaskName.name = 'txtTaskTitle';
         inputTaskName.type = 'text';
 
@@ -178,7 +182,9 @@ class CreateTaskModal {
         modalContent.append(inputProjectName);
         modalContent.append(titleTask);
         modalContent.append(inputTaskName);
+        modalContent.append(document.createElement('br'));
         modalContent.append(btnCreateTask);
+        modalContent.append(btnCancelCreateTask);
 
         modal.append(modalContent);
         this.modal = modal;

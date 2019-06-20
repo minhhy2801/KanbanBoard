@@ -13,8 +13,9 @@ let style = {
 
 
 class ListTasks {
-    constructor(listTasks) {
+    constructor(listTasks, header) {
         this.listTasks = listTasks;
+        this.header = header;
     }
 
     render() {
@@ -22,7 +23,7 @@ class ListTasks {
         setStyle(listTasks, style.listTasksStyle);
 
         this.listTasks.forEach(objTask => {
-            let task = new Task(objTask.num_progress.value, objTask.txt_projectTitle.value, objTask.txt_taskTitle.value, objTask.$id.value);
+            let task = new Task(objTask.num_progress.value, objTask.txt_projectTitle.value, objTask.txt_taskTitle.value, objTask.$id.value, this.header);
             listTasks.append(task.render());
         });
         return listTasks;

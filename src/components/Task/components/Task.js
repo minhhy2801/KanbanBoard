@@ -1,4 +1,5 @@
 import { setStyle } from "../../../util/style";
+import { DRAG_ID } from "../../../config";
 
 
 let style = {
@@ -19,11 +20,12 @@ let style = {
 }
 
 class Task {
-    constructor(numProgress, projectTitle, taskTitle, id) {
+    constructor(numProgress, projectTitle, taskTitle, id, header) {
         this.numProgress = numProgress;
         this.projectTitle = projectTitle;
         this.taskTitle = taskTitle;
         this.id = id;
+        this.header = header;
     }
 
     deleteTaskFromAPI(recordId) {
@@ -42,7 +44,7 @@ class Task {
             dangerMode: true,
         }).then((isDelete) => {
             if (isDelete) {
-                deleteTaskFromAPI(recordId);
+                this.deleteTaskFromAPI(recordId);
                 swal("Your task has been deleted!", {
                     icon: "success",
                 }).then(value => {
@@ -59,7 +61,7 @@ class Task {
         setStyle(taskEl, style.taskStyle);
 
         taskEl.id = this.id;
-        taskEl.innerText = '[' + this.numProgress + '%] Project Title: ' +
+        taskEl.innerText = '[' + this.numProgress + '%] Project Name: ' +
             this.projectTitle + '\n Task Name: ' +
             this.taskTitle + '\n';
 
@@ -67,14 +69,21 @@ class Task {
             window.open('/k/2/show#record=' + this.id);
         };
 
+        let header = this.header;
+
         taskEl.addEventListener('dragstart', function (event) {
             event.dataTransfer.setData('text', event.target.id);
+            window.DRAG_ID = this.id;
+            window.NUM_PROGRESS = this.numProgress;
+            window.HEADER = header;
         })
 
+        taskEl.draggable = true;
         setStyle(linkDelete, style.linkDeleteStyle);
+
         linkDelete.textContent = 'X';
         linkDelete.onclick = () => {
-            processDeleteTask(this.id);
+            this.processDeleteTask(this.id);
         }
 
         taskEl.append(document.createElement('br'));
