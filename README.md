@@ -9,7 +9,7 @@ This is a todo app for kintone application - Kanban Board App.
 ## Preparing the App
 ### Create an App from scratch
 
-From the Kintone portal, click the [+] icon within the Apps widget.
+From the Kintone portal, click the **[+]** icon within the Apps widget.
 
 ![createApp](./screenshot/createApp.png)
 
@@ -19,9 +19,10 @@ Then click Create App from Scratch to create a new Kintone App.
 
 ### Form settings
 Add the following fields to the App form.
-![formSetting](./screenshot/formSetting.png)
-
-Change the settings for each field as shown below.
+![formSetting](./screenshot/formSetting.png)   
+   
+Change the settings for each field as shown below.  
+  
 
 | Field type      |     Field name      |    Field code     |Note|
 | :---        |    :----:   |          ---: |  ---: |
@@ -34,12 +35,12 @@ Change the settings for each field as shown below.
 
 ### Custom view settings
 
-Next, navigate to the Views tab. Click the [+] button to create a new view.
-![addView](./screenshot/addView.png)
-
-Select Custom view as the display format of the record view.
-![customView](./screenshot/customView.png)
-Enter the following code in the HTML code box.
+Next, navigate to the Views tab. Click the **[+]** button to create a new view.  
+![addView](./screenshot/addView.png) . 
+  
+Select **Custom view** as the display format of the record view.  
+![customView](./screenshot/customView.png) . 
+Enter the following code in the HTML code box.  
 
 ```
  <div class="drop-target" style="display: flex; width: 100%; align-items: stretch; ">
@@ -77,19 +78,19 @@ Enter the following code in the HTML code box.
     </div>
 ```
 
-Click the Save button, and then click Activate App to create the App.
+Click the **Save** button, and then click **Update App** to create the App.
 
 
 ## Customizing with JavaScript
 
-The javascript & css files (getListTasks.js, createTaskModal.js, updateTask.js, style.css) and the libraries used inside it will need to be uploaded to the JavaScript files for PC section of the JavaScript & CSS settings of the App. Refer to the [Customizing Kintone with JavaScript & CSS](https://get.kintone.help/hc/en-us/articles/115001237528-Customizing-Kintone-with-JavaScript-CSS#App) article in the Kintone Help Center for information on uploading JavaScript files and libraries to an App.
+The javascript & css files **(getListTasks.js, createTaskModal.js, updateTask.js, style.css)** and the libraries used inside it will need to be uploaded to the JavaScript files for PC section of the JavaScript & CSS settings of the App. Refer to the [Customizing Kintone with JavaScript & CSS](https://get.kintone.help/hc/en-us/articles/115001237528-Customizing-Kintone-with-JavaScript-CSS#App) article in the Kintone Help Center for information on uploading JavaScript files and libraries to an App.
 
-Libraries within the Kintone CDN: Specify by URL
+Libraries within the Kintone CDN: Specify by URL . 
 - [SweetAlert](https://sweetalert.js.org/guides/)
 	- https://unpkg.com/sweetalert/dist/sweetalert.min.js
 
-Once all files have been uploaded, the settings should look like the following.
+Once all files have been uploaded, the settings should look like the following.  
  
 ![listFiles](./screenshot/listFiles.png)
 
-Click the Save button, and then click Update App to update the App.
+Click the **Save** button, and then click **Update App** to update the App.
