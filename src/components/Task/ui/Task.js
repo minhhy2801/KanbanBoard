@@ -1,6 +1,7 @@
-import { setStyle } from "../../../util/style";
+import { setStyle } from "../../../util/styleUtil";
 import { DRAG_ID } from "../../../config";
 import { taskStyle, linkDeleteStyle } from "./style";
+import TaskContainer from "../container";
 
 class Task {
     constructor(numProgress, projectTitle, taskTitle, id, header) {
@@ -9,32 +10,6 @@ class Task {
         this.taskTitle = taskTitle;
         this.id = id;
         this.header = header;
-    }
-
-    deleteTaskFromAPI(recordId) {
-        var body = { app: 2, ids: [recordId] };
-
-        return kintone.api(kintone.api.url('/k/v1/records', true), 'DELETE', body);
-    }
-
-    processDeleteTask(recordId) {
-        window.event.stopImmediatePropagation();
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to delete this task",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        }).then((isDelete) => {
-            if (isDelete) {
-                this.deleteTaskFromAPI(recordId);
-                swal("Your task has been deleted!", {
-                    icon: "success",
-                }).then(value => {
-                    window.location.reload(true);
-                });
-            }
-        });
     }
 
     render() {
@@ -65,8 +40,10 @@ class Task {
         setStyle(linkDelete, linkDeleteStyle);
 
         linkDelete.textContent = 'X';
+
         linkDelete.onclick = () => {
-            this.processDeleteTask(this.id);
+            let container = new TaskContainer(this.numProgress, this.projectTitle, this.taskTitle, this.id, this.header);
+            container.processDeleteTask();
         }
 
         taskEl.append(document.createElement('br'));

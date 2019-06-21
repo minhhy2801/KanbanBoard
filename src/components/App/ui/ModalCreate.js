@@ -1,5 +1,6 @@
-import { setStyle } from "../../../util/style";
-import {modalStyle, modalContentStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, closeSpanStyleHover, modalHideStyle, modalShowStyle, btnCreateStyle} from "./style";
+import { setStyle } from "../../../util/styleUtil";
+import { modalStyle, modalContentStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, closeSpanStyleHover, modalHideStyle, modalShowStyle, btnCreateStyle } from "./style";
+import Button from "./Button";
 
 
 class CreateTaskModal {
@@ -7,8 +8,16 @@ class CreateTaskModal {
         this.status = status;
     }
 
+    isVisible(isVisible) {
+        if (isVisible) {
+            setStyle(this.modal, modalShowStyle)
+        } else {
+            setStyle(this.modal, modalHideStyle)
+        }
+    }
+
     processCreateTask(inputProjectName, inputTaskName, modal) {
-        this.createTaskFromAPI(inputProjectName, inputTaskName).then(resp => {
+        createTaskFromAPI(inputProjectName, inputTaskName).then(resp => {
             swal({
                 title: "Success!",
                 text: "Your task added in todo list",
@@ -28,44 +37,11 @@ class CreateTaskModal {
         })
     }
 
-    createTaskFromAPI(projectTitle, taskTitle) {
-        let body = {
-            app: 2,
-            record: {
-                txt_projectTitle: {},
-                txt_taskTitle: {},
-                rb_status: {},
-                num_progress: {},
-                rich_text_description: {},
-                user_selection_assignee: {}
-            }
-        };
-
-        body.record.txt_projectTitle.value = projectTitle;
-        body.record.txt_taskTitle.value = taskTitle;
-        body.record.rb_status.value = "Todo"
-        body.record.num_progress.value = 1
-        body.record.rich_text_description.value = '<p>aa</p>'
-
-        body.record.user_selection_assignee.value = [{}]
-        body.record.user_selection_assignee.value[0].code = kintone.getLoginUser().code;
-
-        return kintone.api(kintone.api.url('/k/v1/record', true), 'POST', body);
-    }
-
-    isVisible(isVisible) {
-        if (isVisible) {
-            setStyle(this.modal, modalShowStyle)
-        } else {
-            setStyle(this.modal, modalHideStyle)
-        }
-    }
-
     render() {
         let modal = document.createElement('div');
         let modalContent = document.createElement('div');
         let closeSpan = document.createElement('span');
-        let btnCreateTask = document.createElement('button');
+        let btnCreateTask = new Button('Submit', processCreateTask(inputProjectName, inputTaskName, modal), btnCreateStyle);
         let btnCancelCreateTask = document.createElement('button');
         let titleAddTask = document.createElement('h1');
         let titleTask = document.createElement('p');

@@ -1,4 +1,5 @@
-import ListBoard from './components/ListBoards'
+import ListBoard from './ui/ListBoards'
+import { createTaskFromAPI } from './service';
 
 class ListBoardContainer {
     constructor(listBoards, triggerModal, status) {
@@ -7,6 +8,8 @@ class ListBoardContainer {
         this.status = status;
         this.listBoardsApp = new ListBoard(this.listBoards, this.triggerModal, this.status);
     }
+
+    
 
     render() {
         return this.listBoardsApp.render();

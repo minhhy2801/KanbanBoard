@@ -1,5 +1,5 @@
 import Board from "../../Board/container";
-import { setStyle } from "../../../util/style";
+import { setStyle } from "../../../util/styleUtil";
 import { DRAG_ID } from "../../../config";
 import { listBoardsStyle } from "./style";
 
@@ -10,7 +10,6 @@ class ListBoards {
         this.status = status;
     }
 
-    
     render() {
         let listBoardEl = document.createElement('div');
 

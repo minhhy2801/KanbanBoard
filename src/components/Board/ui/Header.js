@@ -1,5 +1,7 @@
-import { setStyle } from "../../../util/style";
+import { setStyle } from "../../../util/styleUtil";
 import { btnNewTaskStyle } from "./style";
+import BoardContainer from "../container";
+import { TODO_STATUS } from "../../../config";
 
 class Header {
     constructor(totalCount, stateName, onClickOpenModal) {
@@ -11,12 +13,15 @@ class Header {
     render() {
         let headerEl = document.createElement('div');
 
-        if (this.stateName === 'Todo') {
+        if (this.stateName === TODO_STATUS) {
             let btnNewTaskEl = document.createElement('button');
 
             setStyle(btnNewTaskEl, btnNewTaskStyle);
             btnNewTaskEl.innerText = '+';
-            btnNewTaskEl.onclick = this.onClickOpenModal.bind(this);
+            
+            let boardContainer = new BoardContainer([], this.stateName, this.onClickOpenModal);
+            
+            btnNewTaskEl.onclick = boardContainer.openCreateModal.bind(this);
             headerEl.append(btnNewTaskEl);
         }
 
