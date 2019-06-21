@@ -1,5 +1,5 @@
 import { setStyle } from "../../../util/style";
-import style, {modalStyle} from "./style";
+import {modalStyle, modalContentStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, closeSpanStyleHover, modalHideStyle, modalShowStyle, btnCreateStyle} from "./style";
 
 
 class CreateTaskModal {
@@ -55,9 +55,9 @@ class CreateTaskModal {
 
     isVisible(isVisible) {
         if (isVisible) {
-            setStyle(this.modal, style.modalShowStyle)
+            setStyle(this.modal, modalShowStyle)
         } else {
-            setStyle(this.modal, style.modalHideStyle)
+            setStyle(this.modal, modalHideStyle)
         }
     }
 
@@ -73,13 +73,13 @@ class CreateTaskModal {
         let titleProject = document.createElement('p');
         let inputProjectName = document.createElement('input');
 
-        setStyle(modal, style.modalStyle);
-        setStyle(modalContent, style.modalContentStyle);
-        setStyle(btnCancelCreateTask, style.btnCancelStyle);
-        setStyle(btnCreateTask, style.btnSumbitCreateStyle);
-        setStyle(closeSpan, style.closeSpanStyle);
-        setStyle(inputProjectName, style.inputWidthStyle);
-        setStyle(inputTaskName, style.inputWidthStyle);
+        setStyle(modal, modalStyle);
+        setStyle(modalContent, modalContentStyle);
+        setStyle(btnCancelCreateTask, btnCancelStyle);
+        setStyle(btnCreateTask, btnCreateStyle);
+        setStyle(closeSpan, closeSpanStyle);
+        setStyle(inputProjectName, inputWidthStyle);
+        setStyle(inputTaskName, inputWidthStyle);
 
         closeSpan.textContent = 'X';
         titleAddTask.textContent = 'Add New Task';
@@ -95,25 +95,25 @@ class CreateTaskModal {
         btnCreateTask.textContent = 'Submit';
 
         closeSpan.onmouseover = () => {
-            setStyle(closeSpan, style.closeSpanStyleHover);
+            setStyle(closeSpan, closeSpanStyleHover);
         };
 
         closeSpan.onfocus = () => {
-            setStyle(closeSpan, style.closeSpanStyleHover);
+            setStyle(closeSpan, closeSpanStyleHover);
         }
 
         closeSpan.onclick = () => {
-            setStyle(modal, style.modalHideStyle);
+            setStyle(modal, modalHideStyle);
         }
 
         btnCancelCreateTask.onclick = () => {
-            setStyle(modal, style.modalHideStyle);
+            setStyle(modal, modalHideStyle);
 
         }
 
         window.onclick = (event) => {
             if (event.target === modal)
-                setStyle(modal, style.modalHideStyle);
+                setStyle(modal, modalHideStyle);
         }
 
         btnCreateTask.onclick = () => {

@@ -1,14 +1,7 @@
 import Board from "../../Board/container";
 import { setStyle } from "../../../util/style";
 import { DRAG_ID } from "../../../config";
-
-let style = {
-    listBoardsStyle: {
-        display: 'flex',
-        width: '100%',
-        alignItems: 'stretch'
-    }
-}
+import { listBoardsStyle } from "./style";
 
 class ListBoards {
     constructor(listBoards, triggerModal, status) {
@@ -21,7 +14,7 @@ class ListBoards {
     render() {
         let listBoardEl = document.createElement('div');
 
-        setStyle(listBoardEl, style.listBoardsStyle);
+        setStyle(listBoardEl, listBoardsStyle);
 
         this.status.forEach((state, index) => {
             let board = new Board(this.listBoards[index].records, state, this.triggerModal);

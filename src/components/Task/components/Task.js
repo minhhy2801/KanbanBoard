@@ -1,23 +1,6 @@
 import { setStyle } from "../../../util/style";
 import { DRAG_ID } from "../../../config";
-
-
-let style = {
-    taskStyle: {
-        border: '1px solid black',
-        width: '80%',
-        padding: '2%',
-        margin: '2%',
-        marginLeft: '8%',
-        minHeight: '10vh'
-    },
-    linkDeleteStyle: {
-        float: 'right',
-        color: '#aaa',
-        fontSize: '20px',
-        fontWeight: 'bold'
-    }
-}
+import { taskStyle, linkDeleteStyle } from "./style";
 
 class Task {
     constructor(numProgress, projectTitle, taskTitle, id, header) {
@@ -58,7 +41,7 @@ class Task {
         let taskEl = document.createElement('div');
         let linkDelete = document.createElement('a');
 
-        setStyle(taskEl, style.taskStyle);
+        setStyle(taskEl, taskStyle);
 
         taskEl.id = this.id;
         taskEl.innerText = '[' + this.numProgress + '%] Project Name: ' +
@@ -79,7 +62,7 @@ class Task {
         })
 
         taskEl.draggable = true;
-        setStyle(linkDelete, style.linkDeleteStyle);
+        setStyle(linkDelete, linkDeleteStyle);
 
         linkDelete.textContent = 'X';
         linkDelete.onclick = () => {

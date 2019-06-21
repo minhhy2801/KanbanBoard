@@ -1,15 +1,5 @@
 import { setStyle } from "../../../util/style";
-
-let style = {
-    btnNewTaskStyle: {
-        float: 'right',
-        backgroundColor: 'grey',
-        border: '1px solid white',
-        color: 'white',
-        width: '30px',
-        height: '30px'
-    }
-}
+import { btnNewTaskStyle } from "./style";
 
 class Header {
     constructor(totalCount, stateName, onClickOpenModal) {
@@ -24,7 +14,7 @@ class Header {
         if (this.stateName === 'Todo') {
             let btnNewTaskEl = document.createElement('button');
 
-            setStyle(btnNewTaskEl, style.btnNewTaskStyle);
+            setStyle(btnNewTaskEl, btnNewTaskStyle);
             btnNewTaskEl.innerText = '+';
             btnNewTaskEl.onclick = this.onClickOpenModal.bind(this);
             headerEl.append(btnNewTaskEl);

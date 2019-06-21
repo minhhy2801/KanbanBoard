@@ -1,3 +1,5 @@
+// CreateTaskModal
+
 let modalStyle = {
     display: 'none',
     position: 'fixed',
@@ -11,55 +13,85 @@ let modalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
 }
 
+let modalContentStyle = {
+    backgroundColor: '#fefefe',
+    margin: '15% auto',
+    padding: '20px',
+    border: '1px solid #888',
+    width: '20%'
+}
+
+let btnCreateStyle = {
+    backgroundColor: 'brown',
+    border: '1px solid white',
+    color: 'white',
+    marginRight: '5%',
+    marginLeft: '30%',
+    height: '50px',
+    marginTop: '2%'
+}
+
+let btnCancelStyle = {
+    backgroundColor: 'gray',
+    border: '1px solid white',
+    color: 'white',
+    height: '50px',
+}
+
+let closeSpanStyle = {
+    color: '#aaa',
+    float: 'right',
+    fontSize: '28px',
+    fontWeight: 'bold'
+}
+
+let closeSpanStyleHover = {
+    color: 'black',
+    textDecoration: 'none',
+    cursor: 'pointer'
+}
+
+let modalHideStyle = { display: 'none' }
+
+let modalShowStyle = { display: 'block' }
+
+let inputWidthStyle = { width: '100%' }
+
+// ListBoards
+let listBoardsStyle = {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'stretch'
+}
+
 
 let style = {
     modalStyle: modalStyle,
-    modalContentStyle: {
-        backgroundColor: '#fefefe',
-        margin: '15% auto',
-        padding: '20px',
-        border: '1px solid #888',
-        width: '20%'
-    },
-    btnSumbitCreateStyle: {
-        backgroundColor: 'brown',
-        border: '1px solid white',
-        color: 'white',
-        marginRight: '5%',
-        marginLeft: '30%',
-        height: '50px',
-        marginTop: '2%'
-
-    },
-    btnCancelStyle: {
-        backgroundColor: 'gray',
-        border: '1px solid white',
-        color: 'white',
-        height: '50px',
-    },
-    closeSpanStyle: {
-        color: '#aaa',
-        float: 'right',
-        fontSize: '28px',
-        fontWeight: 'bold'
-    },
-    closeSpanStyleHover: {
-        color: 'black',
-        textDecoration: 'none',
-        cursor: 'pointer'
-    },
-    modalHideStyle: {
-        display: 'none'
-    },
-    modalShowStyle: {
-        display: 'block'
-    },
-    inputWidthStyle: {
-        width: '100%',
-    }
+    modalContentStyle: modalContentStyle,
+    btnCreateStyle: btnCreateStyle,
+    btnCancelStyle: btnCancelStyle,
+    closeSpanStyle: closeSpanStyle,
+    closeSpanStyleHover: closeSpanStyleHover,
+    modalHideStyle: modalHideStyle,
+    modalShowStyle: modalShowStyle,
+    inputWidthStyle: inputWidthStyle,
+    listBoardsStyle: listBoardsStyle
 }
 
 
 export default style;
-export {modalStyle};
+export {
+    modalStyle, 
+    modalContentStyle, 
+    btnCreateStyle, 
+    btnCancelStyle,
+    closeSpanStyle,
+    closeSpanStyleHover,
+    modalHideStyle,
+    modalShowStyle,
+    inputWidthStyle,
+    listBoardsStyle
+};
+
+
 

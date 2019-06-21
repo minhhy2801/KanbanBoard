@@ -3,19 +3,7 @@ import ListTasks from "./ListTasks";
 import CreateTaskModal from "../../App/components/CreateTaskModal";
 import { setStyle } from "../../../util/style";
 import { APP_ID } from "../../../config";
-
-
-let style = {
-    boardStyle: {
-        border: '1px solid black',
-        padding: '5px',
-        marginLeft: '1%',
-        width: '22%',
-        marginTop: '10px',
-        textAlign: 'center',
-        minHeight: '30vh',
-    }
-}
+import { boardStyle } from "./style";
 
 class Board {
     constructor(listTasks, header, modal) {
@@ -82,7 +70,7 @@ class Board {
     
     render() {
         let board = document.createElement('div');
-        setStyle(board, style.boardStyle);
+        setStyle(board, boardStyle);
 
         let headerEl = new Header(this.listTasks.length, this.header, this.openCreateModal);
         let listTasks = new ListTasks(this.listTasks, this.header);
