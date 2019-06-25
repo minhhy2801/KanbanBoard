@@ -12,10 +12,13 @@ class TextInput {
         let title = document.createElement('p');
         input.type = 'text';
         title.textContent = this.title;
+
         setStyle(input, this.style);
 
         border.append(title);
         border.append(input);
+
+        this.inputDOM = input;
         return border;
     }
 }

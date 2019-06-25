@@ -1,17 +1,18 @@
 import { setStyle } from "../../../util/styleUtil";
 
 class Button {
-    constructor(text, onClick, style) {
-        this.text = text;
+    constructor(btnName, onClick, style) {
+        this.btnName = btnName;
         this.onClick = onClick;
         this.style = style;
     }
 
     render() {
         let btn = document.createElement('button');
-        btn.textContent = text;
+        btn.textContent = this.btnName;
         setStyle(btn, this.style);
-        btn.onClick = this.onClick;
+
+        btn.onclick = () => { this.onClick(); };
         return btn;
     }
 }

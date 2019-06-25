@@ -51,11 +51,17 @@ let closeSpanStyleHover = {
     cursor: 'pointer'
 }
 
-let modalHideStyle = { display: 'none' }
+let modalHideStyle = {
+    display: 'none',
+}
 
-let modalShowStyle = { display: 'block' }
+let modalShowStyle = {
+    display: 'block',
+}
 
-let inputWidthStyle = { width: '100%' }
+let inputWidthStyle = {
+    width: '100%',
+}
 
 // ListBoards
 let listBoardsStyle = {
@@ -81,9 +87,9 @@ let style = {
 
 export default style;
 export {
-    modalStyle, 
-    modalContentStyle, 
-    btnCreateStyle, 
+    modalStyle,
+    modalContentStyle,
+    btnCreateStyle,
     btnCancelStyle,
     closeSpanStyle,
     closeSpanStyleHover,

@@ -1,113 +1,56 @@
 import { setStyle } from "../../../util/styleUtil";
 import { modalStyle, modalContentStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, closeSpanStyleHover, modalHideStyle, modalShowStyle, btnCreateStyle } from "./style";
 import Button from "./Button";
+import TextInput from "./TextInput";
+import CloseSpan from "./CloseSpan";
+import { span_close, button_submit, button_cancel, title_input_project, title_input_task } from "../../../util/configMessage";
 
 
 class CreateTaskModal {
-    constructor(status) {
+    constructor(title, status, onSumbitTask, closeModal) {
+        this.title = title;
         this.status = status;
+        this.onSumbitTask = onSumbitTask;
+        this.closeModal = closeModal;
+        this.inputProject = new TextInput(inputWidthStyle, title_input_project);
+        this.inputTask = new TextInput(inputWidthStyle, title_input_task);
     }
 
-    isVisible(isVisible) {
-        if (isVisible) {
-            setStyle(this.modal, modalShowStyle)
-        } else {
-            setStyle(this.modal, modalHideStyle)
-        }
-    }
-
-    processCreateTask(inputProjectName, inputTaskName, modal) {
-        createTaskFromAPI(inputProjectName, inputTaskName).then(resp => {
-            swal({
-                title: "Success!",
-                text: "Your task added in todo list",
-                icon: "success",
-                button: "Close",
-            }).then(value => {
-                modal.style = style.modalHideStyle;
-                window.location.reload(true);
-            });
-        }).catch(err => {
-            swal({
-                title: "Fail!",
-                text: "Check task information and try again!",
-                icon: "error",
-                button: "Close",
-            });
-        })
+    onClickSubmit = () => {
+        this.onSumbitTask(this.inputProject.inputDOM.value, this.inputTask.inputDOM.value, this.closeModal);
     }
 
     render() {
         let modal = document.createElement('div');
         let modalContent = document.createElement('div');
-        let closeSpan = document.createElement('span');
-        let btnCreateTask = new Button('Submit', processCreateTask(inputProjectName, inputTaskName, modal), btnCreateStyle);
-        let btnCancelCreateTask = document.createElement('button');
         let titleAddTask = document.createElement('h1');
-        let titleTask = document.createElement('p');
-        let inputTaskName = document.createElement('input');
-        let titleProject = document.createElement('p');
-        let inputProjectName = document.createElement('input');
 
-        setStyle(modal, modalStyle);
-        setStyle(modalContent, modalContentStyle);
-        setStyle(btnCancelCreateTask, btnCancelStyle);
-        setStyle(btnCreateTask, btnCreateStyle);
-        setStyle(closeSpan, closeSpanStyle);
-        setStyle(inputProjectName, inputWidthStyle);
-        setStyle(inputTaskName, inputWidthStyle);
+        let closeSpan = new CloseSpan(span_close, closeSpanStyle, closeSpanStyleHover, closeSpanStyleHover, modalHideStyle, modal);
+        let btnCreateTask = new Button(button_submit, this.onClickSubmit, btnCreateStyle);
+        let btnCancelCreateTask = new Button(button_cancel, this.closeModal, btnCancelStyle);
 
-        closeSpan.textContent = 'X';
-        titleAddTask.textContent = 'Add New Task';
-        titleProject.textContent = 'Project Name:';
-        inputProjectName.name = 'txtProjectTitle';
-        inputProjectName.type = 'text';
 
-        titleTask.textContent = 'Task Name:';
-        inputTaskName.name = 'txtTaskTitle';
-        inputTaskName.type = 'text';
-
-        btnCancelCreateTask.textContent = 'Cancel';
-        btnCreateTask.textContent = 'Submit';
-
-        closeSpan.onmouseover = () => {
-            setStyle(closeSpan, closeSpanStyleHover);
-        };
-
-        closeSpan.onfocus = () => {
-            setStyle(closeSpan, closeSpanStyleHover);
-        }
-
-        closeSpan.onclick = () => {
-            setStyle(modal, modalHideStyle);
-        }
-
-        btnCancelCreateTask.onclick = () => {
-            setStyle(modal, modalHideStyle);
-
-        }
+        titleAddTask.textContent = this.title;
 
         window.onclick = (event) => {
             if (event.target === modal)
                 setStyle(modal, modalHideStyle);
         }
 
-        btnCreateTask.onclick = () => {
-            this.processCreateTask(inputProjectName.value, inputTaskName.value, modal);
-        }
+        setStyle(modal, modalStyle);
+        setStyle(modalContent, modalContentStyle);
 
-        modalContent.append(closeSpan);
+        modalContent.append(closeSpan.render());
         modalContent.append(titleAddTask);
-        modalContent.append(titleProject);
-        modalContent.append(inputProjectName);
-        modalContent.append(titleTask);
-        modalContent.append(inputTaskName);
+        modalContent.append(this.inputProject.render());
+        modalContent.append(this.inputTask.render());
         modalContent.append(document.createElement('br'));
-        modalContent.append(btnCreateTask);
-        modalContent.append(btnCancelCreateTask);
+        modalContent.append(btnCreateTask.render());
+        modalContent.append(btnCancelCreateTask.render());
 
         modal.append(modalContent);
-        this.modal = modal;
+        this.modalDOM = modal;
+
         return modal;
     }
 

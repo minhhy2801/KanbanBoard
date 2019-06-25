@@ -16,6 +16,6 @@ export const updateStatusFromAPI = (recordId, projecTitle, taskTitle, status, nu
             user_selection_assignee: { value: [{ code: userCode }] }
         }
     };
-
     return kintone.api(kintone.api.url('/k/v1/record', true), 'PUT', body);
 }
+
