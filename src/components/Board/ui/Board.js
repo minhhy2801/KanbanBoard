@@ -50,15 +50,15 @@ class Board {
             let dragBoard = window.dragBoard;
             dragBoard.setTotalRecords();
 
-            delete window.draggingTask
-            delete window.dragBoard
+            delete window.draggingTask;
+            delete window.dragBoard;
             
-            dragBoard.rerender()
-            this.rerender()
+            // dragBoard.rerender();
+            this.rerender();
         });
 
         this.boardDOM = board;
-        this.rerender()
+        this.rerender();
         return board;
     }
 }
