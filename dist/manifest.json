@@ -1,0 +1,19 @@
+{
+    "manifest_version": 1,
+    "version": 1,
+    "type": "APP",
+    "name": {
+        "en": "Kanban Board"
+    },
+    "description": {
+        "en": "Plugin to create Kanban board"
+    },
+    "icon": "icon.jpg",
+    "desktop": {
+        "js": "js/plugin.js"
+    },
+    "config": {
+        "html": "html/config.html",
+        "js": "js/config.js"
+    }
+}
