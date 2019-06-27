@@ -1,15 +1,17 @@
-import { NUM_PROGRESS_INIT, TODO_STATUS, DESCRIPTION_INIT } from "../../util/config";
+import { NUM_PROGRESS_INIT, DESCRIPTION_INIT, rb_StatusField, text_ProjectField, text_TaskField, num_ProgressField, rich_DescriptionField, assignee_SelectField, KEY } from "../../util/config";
+
+let config = kintone.plugin.app.getConfig(KEY);
 
 export const createTaskFromAPI = (projectTitle, taskTitle) => {
     let body = {
         app: kintone.app.getId(),
         record: {
-            txt_projectTitle: { value: projectTitle },
-            txt_taskTitle: { value: taskTitle },
-            rb_status: { value: TODO_STATUS },
-            num_progress: { value: NUM_PROGRESS_INIT },
-            rich_text_description: { value: DESCRIPTION_INIT },
-            user_selection_assignee: { value: [{ code: kintone.getLoginUser().code }] }
+            [text_ProjectField]: { value: projectTitle },
+            [text_TaskField]: { value: taskTitle },
+            [rb_StatusField]: { value: config.todoField },
+            [num_ProgressField]: { value: config.numProgess },
+            [rich_DescriptionField]: { value: DESCRIPTION_INIT },
+            [assignee_SelectField]: { value: [{ code: kintone.getLoginUser().code }] }
         }
     };
 

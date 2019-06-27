@@ -2,6 +2,7 @@ class Select {
     constructor() {
         this.label = document.createElement('h4');
         this.options = document.createElement('select')
+        this.listStatus = []
     }
 
     setOptions = (listOpts, value) => {
@@ -16,6 +17,34 @@ class Select {
 
         if (typeof value !== 'undefined')
             this.options.value = value
+    }
+
+    setTypeOptions = (listOpts, value) => {
+        this.options.innerHTML = ''
+
+        listOpts.forEach((opt, index) => {
+
+            let optEl = document.createElement('option')
+            optEl.value = opt.code
+            optEl.text = opt.label
+            this.options.add(optEl, index)
+
+        });
+        if (typeof value !== 'undefined')
+            this.options.value = value
+    }
+
+    getListStatus = (listOpts) => {
+        let listStatus = []
+        for (let i = 0; i < listOpts.length; i++) {
+            listOpts.map((opt) => {
+                if (i == opt.index) {
+                    listStatus.push(opt.label)
+                }
+            });
+        }
+        this.listStatus = listStatus
+        return listStatus
     }
 
     setSelected = (value) => {

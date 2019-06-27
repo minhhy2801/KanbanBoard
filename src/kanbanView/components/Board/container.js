@@ -1,6 +1,6 @@
 import Board from './ui/Board';
 import { getRecordByIdFromAPI, updateStatusFromAPI } from './service';
-import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, DONE_STATUS, LIST_STATUS } from '../../util/config';
+import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, DONE_STATUS } from '../../util/config';
 import CreateTaskModal from '../App/ui/ModalCreate';
 import { setStyle } from '../../util/styleUtil';
 import { modalShowStyle, modalHideStyle } from '../App/ui/style';

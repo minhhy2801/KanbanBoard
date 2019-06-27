@@ -9,7 +9,7 @@ class ConfigFormEl {
 
         this.buttonWrapper = document.createElement('div')
         this.submitButton = document.createElement('button')
-        this.submitButton.innerText = 'Submit'
+        this.submitButton.innerText = 'Save'
         this.submitButton.onclick = handleSubmit
         this.buttonWrapper.appendChild(this.submitButton)
 

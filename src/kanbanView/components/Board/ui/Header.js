@@ -1,7 +1,9 @@
 import { btnNewTaskStyle } from "./style";
-import { TODO_STATUS } from "../../../util/config";
 import PlusButton from "./PlusButton";
 import { button_add } from "../../../util/configMessage";
+import { KEY } from "../../../util/config";
+
+let config = kintone.plugin.app.getConfig(KEY);
 
 class Header {
     constructor(totalCount, stateName, onClickOpenModal) {
@@ -19,7 +21,7 @@ class Header {
     render() {
         let headerEl = document.createElement('div');
 
-        if (this.stateName === TODO_STATUS) {
+        if (this.stateName === config.todoField) {
             let btnNewTask = new PlusButton(button_add, btnNewTaskStyle, this.onClickOpenModal);
 
             headerEl.append(btnNewTask.render());
