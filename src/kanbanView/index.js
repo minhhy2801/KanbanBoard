@@ -5,12 +5,8 @@ import ListBoardContainer from './components/App/container';
 let config = kintone.plugin.app.getConfig(KEY);
 
 kintone.events.on('app.record.index.show', function (e) {
-    console.log(config);
     if (e.viewId == config.viewID) {
-        console.log(typeof config.listStatus);
         let arr = config.listStatus.split(",")
-        console.log(arr);
-        
         let boards = arr.map(status => {
             return getRecordsByStatus(status);
         })
