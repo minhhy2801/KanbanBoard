@@ -1,11 +1,12 @@
 import Board from './ui/Board';
 import { getRecordByIdFromAPI, updateStatusFromAPI } from './service';
-import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, DONE_STATUS } from '../../util/config';
+import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, KEY } from '../../util/config';
 import CreateTaskModal from '../App/ui/ModalCreate';
 import { setStyle } from '../../util/styleUtil';
 import { modalShowStyle, modalHideStyle } from '../App/ui/style';
 import { getRecordsByStatus } from '../../service';
 
+let config = kintone.plugin.app.getConfig(KEY);
 class BoardContainer {
     constructor(listTasks, header, modal, createTask) {
         this.listTasks = listTasks;
@@ -54,7 +55,7 @@ class BoardContainer {
             let record = await getRecordByIdFromAPI(recordId);
             let numProgress;
             let status = this.header
-            if (status === DONE_STATUS) {
+            if (status == config.doneField) {
                 numProgress = NUM_PROGRESS_DONE;
             } else {
                 if (record.num_progress.value !== NUM_PROGRESS_DONE) {

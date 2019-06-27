@@ -1,4 +1,4 @@
-import { NUM_PROGRESS_INIT, DESCRIPTION_INIT, rb_StatusField, text_ProjectField, text_TaskField, num_ProgressField, rich_DescriptionField, assignee_SelectField, KEY } from "../../util/config";
+import {DESCRIPTION_INIT, rb_StatusField, text_ProjectField, text_TaskField, num_ProgressField, rich_DescriptionField, assignee_SelectField, KEY } from "../../util/config";
 
 let config = kintone.plugin.app.getConfig(KEY);
 
