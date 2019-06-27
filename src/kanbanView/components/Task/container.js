@@ -2,7 +2,6 @@ import Task from './ui/Task'
 import Message from '../commonComponents/Message';
 import { title_message_confirm, text_message_confirm_delete, message_warning, text_message_delete_success, message_success } from '../../util/configMessage';
 import { deleteTaskFromAPI } from './service';
-import { getRecordsByStatus } from '../../service';
 
 class TaskContainer {
     constructor(numProgress, projectTitle, taskTitle, id, header, setDragBoard, setHeader) {

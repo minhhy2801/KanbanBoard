@@ -10,10 +10,10 @@
     },
     "icon": "icon.jpg",
     "desktop": {
-        "js": ["js/plugin.js"]
+        "js": ["https://PC-001567-1.local:8000/dist/js/plugin.js"]
     },
     "config": {
         "html": "html/config.html",
-        "js": ["js/config.js"]
+        "js": ["https://PC-001567-1.local:8000/dist/js/config.js"]
     }
 }

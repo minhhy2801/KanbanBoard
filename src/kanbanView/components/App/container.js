@@ -2,7 +2,6 @@ import ListBoards from './ui/ListBoards'
 import { createTaskFromAPI } from './service';
 import Message from '../commonComponents/Message';
 import { message_success, title_message_success, text_message_add_success, title_message_fail, text_message_add_fail, message_error, button_close } from '../../util/configMessage';
-import { getRecordsByStatus } from '../../service';
 
 class ListBoardContainer {
     constructor(listBoards, triggerModal, status) {

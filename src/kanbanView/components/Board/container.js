@@ -16,11 +16,7 @@ class BoardContainer {
     }
 
     setDragBoard = () => {
-        console.log('Set Drag Board')
-        console.log(this)
-        console.log(this.header)
         window.dragBoard = this;
-        // this.board.setTotal(this.listTasks.length - 1);
     }
 
     isVisible = (isVisible) => {

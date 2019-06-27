@@ -1,8 +1,6 @@
 import { setStyle } from "../../../util/styleUtil";
-// import { DRAG_ID } from "../../../util/config";
 import { listBoardsStyle } from "./style";
 import BoardContainer from "../../Board/container";
-import { getRecordsByStatus } from "../../../service";
 
 class ListBoards {
     constructor(listBoards, triggerModal, status, createTask) {
@@ -11,20 +9,6 @@ class ListBoards {
         this.status = status;
         this.createTask = createTask;
     }
-
-    // onDragStart = async (state, self) => {
-    //     console.log(state);
-    //     try {
-    //         // console.log(this);
-    //         let records = await getRecordsByStatus(state);
-    //         // console.log(records.totalCount);
-    //         if (records.totalCount > 0) {
-    //             self.setTotal(records.totalCount - 1);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
     render() {
         let listBoardEl = document.createElement('div');

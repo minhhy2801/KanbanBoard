@@ -1,4 +1,3 @@
-import Task from "../../Task/container";
 import { setStyle } from "../../../util/styleUtil";
 import { listTasksStyle } from "./style";
 import TaskContainer from "../../Task/container";

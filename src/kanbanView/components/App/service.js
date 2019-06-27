@@ -1,6 +1,4 @@
 import { NUM_PROGRESS_INIT, TODO_STATUS, DESCRIPTION_INIT } from "../../util/config";
-import { modalShowStyle, modalHideStyle } from "./ui/style";
-import { setStyle } from "../../util/styleUtil";
 
 export const createTaskFromAPI = (projectTitle, taskTitle) => {
     let body = {
