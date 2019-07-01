@@ -31,9 +31,7 @@ class Task {
 
         taskEl.addEventListener('dragstart', async (event) => {
             window.draggingTask = this;
-            // event.dataTransfer.setData('text', event.target.id);
             this.setDragBoard();
-            // self.setHeaderTask(self);
         })
 
         taskEl.draggable = true;

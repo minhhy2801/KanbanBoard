@@ -15,5 +15,5 @@ export const createTaskFromAPI = (projectTitle, taskTitle) => {
         }
     };
 
-    return kintone.api(kintone.api.url('/k/v1/record', true), 'POST', body);
+    return kintone.api(kintone.api.url('/k/v1/record', true), 'POST', body).then(resp => {return resp.id});
 }

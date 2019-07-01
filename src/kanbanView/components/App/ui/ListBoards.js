@@ -8,7 +8,9 @@ class ListBoards {
         this.triggerModal = triggerModal;
         this.status = status;
         this.createTask = createTask;
+        this.board = []
     }
+
 
     render() {
         let listBoardEl = document.createElement('div');
@@ -16,14 +18,16 @@ class ListBoards {
         setStyle(listBoardEl, listBoardsStyle);
 
         this.status.forEach((state, index) => {
-            let board = new BoardContainer(this.listBoards[index].records, state, this.triggerModal, this.createTask);
+            let board = new BoardContainer(this.listBoards[index], state, this.triggerModal, this.createTask);
             listBoardEl.append(board.render());
+            this.board.push(board)
         });
 
         listBoardEl.addEventListener('dragover', function (ev) {
             ev.preventDefault();
         });
 
+        this.listBoardsDOM = listBoardEl
         return listBoardEl;
     }
 

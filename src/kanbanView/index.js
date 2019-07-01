@@ -1,8 +1,12 @@
 import { KEY } from './util/config';
 import { getRecordsByStatus } from './service';
 import ListBoardContainer from './components/App/container';
+import * as firebase from 'firebase/app'
+import { firebaseConfig } from './util/configFirebase';
 
-let config = kintone.plugin.app.getConfig(KEY);
+let config = kintone.plugin.app.getConfig(KEY)
+
+let configFirebase = firebaseConfig()
 
 kintone.events.on('app.record.index.show', function (e) {
     if (e.viewId == config.viewID) {
@@ -13,11 +17,12 @@ kintone.events.on('app.record.index.show', function (e) {
 
         kintone.Promise.all(boards).then(resp => {
             let listBoards = new ListBoardContainer(resp, false, arr);
-
-            document.getElementById('app').append(listBoards.render());
         }).catch(error => {
             console.log(error);
         })
     }
 
 });
+
+
+

@@ -27,7 +27,6 @@ class Header {
             headerEl.append(btnNewTask.render());
         }
         
-        // let titleContentEl = document.createElement('h1');
         this.titleContentEl.textContent = this.stateName + ' (' + this.totalCount + ')';
 
         headerEl.append(this.titleContentEl);

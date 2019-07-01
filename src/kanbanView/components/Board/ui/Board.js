@@ -3,6 +3,7 @@ import ListTasks from "./ListTasks";
 import { setStyle } from "../../../util/styleUtil";
 import { boardStyle } from "./style";
 
+
 class Board {
     constructor(listTasks, header, openCreateModal, updateStatusHeader, setTotalRecords, setDragBoard) {
         this.listTasks = listTasks;
@@ -13,8 +14,8 @@ class Board {
         this.totalCount = this.listTasks.length;
         this.setTotalRecords = setTotalRecords;
         this.setDragBoard = setDragBoard
-        this.listTasksComponent = new ListTasks(this.listTasks, this.header, this.setDragBoard, this.setHeader);
 
+        this.listTasksComponent = new ListTasks(this.listTasks, this.header, this.setDragBoard, this.setHeader);
         this.boardDOM = null
     }
 
@@ -24,12 +25,13 @@ class Board {
 
     setTaskList = (listTasks) => {
         this.listTasks = listTasks
-        this.listTasksComponent = new ListTasks(this.listTasks, this.header, this.setDragBoard, this.setHeader);
+        this.listTasksComponent = new ListTasks(this.listTasks, this.header, this.setDragBoard, this.setHeader, this.getListTasks);
     }
 
     setHeader = (e) => {
         e.header = this.header;
     }
+
 
     rerender() {
         if (this.boardDOM) {
@@ -52,8 +54,7 @@ class Board {
 
             delete window.draggingTask;
             delete window.dragBoard;
-            
-            // dragBoard.rerender();
+
             this.rerender();
         });
 

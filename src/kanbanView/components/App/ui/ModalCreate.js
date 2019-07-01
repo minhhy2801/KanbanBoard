@@ -29,7 +29,6 @@ class CreateTaskModal {
         let btnCreateTask = new Button(button_submit, this.onClickSubmit, btnCreateStyle);
         let btnCancelCreateTask = new Button(button_cancel, this.closeModal, btnCancelStyle);
 
-
         titleAddTask.textContent = this.title;
 
         window.onclick = (event) => {
