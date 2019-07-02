@@ -1,10 +1,10 @@
-import Text from './ui/Text'
+import TextInput from './ui/Text';
 class NumProgressField {
     constructor(valueNumProgress) {
-        this.textEl = new Text()
+        this.textEl = new TextInput()
         this.numProgess = 0
         this.valueNumProgress = valueNumProgress
-        this.numProgressInit = document.createElement('div');
+        this.numProgressInit = document.createElement('div')
 
         this.textEl.setLabel('Number Of Init Progress (%): ')
         this.setNumProgress()

@@ -1,7 +1,14 @@
+import { setStyle } from "../../../util/config";
+
 class TextInput {
     constructor() {
         this.label = document.createElement('h4');
         this.inputValue = document.createElement('input')
+    }
+
+    setStyleText = (value) => {
+        setStyle(this.label, value)
+        setStyle(this.inputValue, value)
     }
 
     setValue = (value) => {
@@ -9,9 +16,9 @@ class TextInput {
     }
 
     getValue() {
-        return this.inputValue.value;
+        return this.inputValue.value
     }
-    
+
     setLabel = (value) => {
         this.label.textContent = value
     }
