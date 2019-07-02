@@ -72,7 +72,9 @@ class BoardContainer {
             await updateStatusFromAPI(recordId, record.txt_projectTitle.value, record.txt_taskTitle.value, status,
                 numProgress, record.rich_text_description.value, record.user_selection_assignee.value[0].code);
 
-            this.updatestatusOnFirebase(recordId, status, record.txt_projectTitle.value, record.txt_taskTitle.value, numProgress)
+            if (window.firebase) {
+                this.updatestatusOnFirebase(recordId, status, record.txt_projectTitle.value, record.txt_taskTitle.value, numProgress)
+            }
 
             await this.setTotalRecords();
 
@@ -89,7 +91,7 @@ class BoardContainer {
             numProgress: numProgess,
             status: status
         };
-        
+
         firebase.database().ref(`app/${kintone.app.getId()}/tasks/${id}`).update(taskData)
     }
 

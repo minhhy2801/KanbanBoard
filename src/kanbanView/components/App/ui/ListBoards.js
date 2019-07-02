@@ -18,7 +18,13 @@ class ListBoards {
         setStyle(listBoardEl, listBoardsStyle);
 
         this.status.forEach((state, index) => {
-            let board = new BoardContainer(this.listBoards[index], state, this.triggerModal, this.createTask);
+            let board = {}
+            if (window.firebase) {
+                board = new BoardContainer(this.listBoards[index], state, this.triggerModal, this.createTask);
+            }
+            else {
+                board = new BoardContainer(this.listBoards[index].records, state, this.triggerModal, this.createTask);
+            }
             listBoardEl.append(board.render());
             this.board.push(board)
         });

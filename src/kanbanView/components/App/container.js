@@ -14,8 +14,13 @@ class ListBoardContainer {
         this.triggerModal = triggerModal;
         this.status = status;
         this.listBoardsApp = null
-        this.writeListTasks()
-        this.getListTasks()
+        if (window.firebase) {
+            this.writeListTasks()
+            this.getListTasks()
+        } else {
+            this.listBoardsApp = new ListBoards(this.listBoards, this.triggerModal, this.status, this.createTask, this.onDragStart);
+        }
+
     }
 
     writeListTasks = () => {
@@ -39,6 +44,7 @@ class ListBoardContainer {
 
         }
     }
+
     getListTasks = () => {
         let map = {}
         let tasks = []
@@ -83,12 +89,21 @@ class ListBoardContainer {
 
             msg.then(val => {
                 closeModal();
-                this.writeNewTask(id, inputProject, inputTask)
+                if (window.firebase) {
+                    this.writeNewTask(id, inputProject, inputTask)
+                } else {
+                    window.location.reload(true);
+                }
             });
         } catch (error) {
             let msg = new Message(title_message_fail, text_message_add_fail, message_error, button_close, false).render();
         }
     }
+
+    render() {
+        return this.listBoardsApp.render();
+    }
+
 
 }
 

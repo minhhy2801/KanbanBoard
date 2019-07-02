@@ -28,8 +28,12 @@ class TaskContainer {
                 deleteTaskFromAPI(this.id);
                 let msgSuccess = new Message(false, text_message_delete_success, message_success, false, false).render();
                 msgSuccess.then(value => {
-                    let ref = firebase.database().ref(`app/${kintone.app.getId()}/tasks/${this.id}`)
-                    ref.remove()
+                    if (window.firebase) {
+                        let ref = firebase.database().ref(`app/${kintone.app.getId()}/tasks/${this.id}`)
+                        ref.remove()
+                    } else {
+                        window.location.reload(true);
+                    }
                 });
             }
         });

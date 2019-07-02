@@ -8,7 +8,8 @@ let config = kintone.plugin.app.getConfig(KEY)
 
 let configFirebase = firebaseConfig()
 
-kintone.events.on('app.record.index.show', function (e) {
+
+kintone.events.on('app.record.index.show', (e) => {
     if (e.viewId == config.viewID) {
         let arr = config.listStatus.split(",")
         let boards = arr.map(status => {
@@ -16,7 +17,18 @@ kintone.events.on('app.record.index.show', function (e) {
         })
 
         kintone.Promise.all(boards).then(resp => {
-            let listBoards = new ListBoardContainer(resp, false, arr);
+            let firebaseRef = firebase.database().ref(".info/connected");
+            firebaseRef.on('value', (connectedSnap) => {
+                if (connectedSnap.val() == true) {
+                    window.firebase = true;
+                } else {
+                    window.firebase = false;
+                }
+                let listBoards = new ListBoardContainer(resp, false, arr);
+                if (!window.firebase) {
+                    document.getElementById('app').append(listBoards.render());
+                }
+            });
         }).catch(error => {
             console.log(error);
         })
