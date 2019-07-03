@@ -10,11 +10,14 @@ let taskStyle = {
 let linkDeleteStyle = {
     float: 'right',
 }
-
+let floatLeft = {
+    float: 'left',
+}
 let style = {
     taskStyle: taskStyle,
+    floatLeft: floatLeft,
     linkDeleteStyle: linkDeleteStyle
 }
 
 export default style;
-export { taskStyle, linkDeleteStyle };
+export { taskStyle, linkDeleteStyle, floatLeft };

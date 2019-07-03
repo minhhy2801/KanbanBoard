@@ -15,6 +15,7 @@ export const message_error = 'error';
 export const button_close = 'Close';
 export const button_cancel = 'Cancel';
 export const button_submit = 'Submit';
+export const button_delete = 'Delete';
 export const button_add = '+';
 export const span_close = 'X';
 

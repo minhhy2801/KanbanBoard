@@ -37,7 +37,10 @@ class CreateTaskModal {
         closeSpan.on('click', () => { modal.hide() })
 
         let btnCreateTask = new Button({ text: button_submit, type: 'submit' })
-        btnCreateTask.on('click', () => { this.onClickSubmit() })
+        btnCreateTask.on('click', () => {
+            this.onClickSubmit()
+            modal.hide()
+        })
 
         let btnCancelCreateTask = new Button({ text: button_cancel });
         btnCancelCreateTask.on('click', () => { modal.hide() })

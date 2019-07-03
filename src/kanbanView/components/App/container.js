@@ -5,6 +5,7 @@ import { message_success, title_message_success, text_message_add_success, title
 import * as firebase from 'firebase/app'
 import 'firebase/database'
 import { KEY, text_ProjectField, text_TaskField, num_ProgressField, rb_StatusField } from '../../util/config';
+import { NotifyPopup } from '@kintone/kintone-ui-component/src/js';
 
 let config = kintone.plugin.app.getConfig(KEY);
 
@@ -83,19 +84,24 @@ class ListBoardContainer {
     }
 
     createTask = async (inputProject, inputTask) => {
+        let body = document.getElementsByTagName("body")[0];
         try {
             let id = await createTaskFromAPI(inputProject, inputTask);
-            let msg = new Message(title_message_success, text_message_add_success, message_success, button_close, false).render();
-            msg.then(val => {
-                if (window.firebase) {
-                    this.writeNewTask(id, inputProject, inputTask)
-                } else {
-                    window.location.reload(true);
-                }
-            });
+            let msg = new NotifyPopup({ text: text_message_add_success, type: message_success })
+            body.append(msg.render())
+
+            if (window.firebase) {
+                this.writeNewTask(id, inputProject, inputTask)
+            } else {
+                window.location.reload(true);
+            }
+
+
         } catch (error) {
-            let msg = new Message(title_message_fail, text_message_add_fail, message_error, button_close, false).render();
+            let msg = new NotifyPopup({ text: title_message_fail, type: message_error })
+            body.append(msg.render())
         }
+
     }
 
     render() {
