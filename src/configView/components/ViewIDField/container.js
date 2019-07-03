@@ -1,14 +1,15 @@
-import Select from "./ui/Select";
 import { getListViews } from "./service";
+import { Dropdown, Label } from '@kintone/kintone-ui-component/src/js'
 
 class ViewIDField {
     constructor(valueView) {
-        this.select = new Select()
+        this.label = new Label()
+        this.select = new Dropdown()
         this.listViews = []
         this.valueView = valueView
         this.viewInit = document.createElement('div')
-
-        this.select.setLabel('View ID: ')
+        this.label.setText('View ID')
+        this.label.setRequired(true)
         this.setViewsList()
     }
 
@@ -17,12 +18,18 @@ class ViewIDField {
         this.listViews = Object.keys(viewsObj).map(key => {
             return viewsObj[key]
         })
+        this.select.innerHTML = ''
 
-        this.select.setOptions(this.listViews, this.valueView)
+        this.listViews.forEach((opt, i) => {
+            this.select.addItem({ label: opt.name, value: opt.id });
+        });
+
+        if (typeof this.valueView !== 'undefined')
+            this.select.setValue(this.valueView)
     }
 
-    setSelectedView = async (value) => {
-        this.select.setSelected(value)
+    setSelected = (value) => {
+        this.select.setValue(value)
     }
 
     getViewID = () => {
@@ -30,8 +37,8 @@ class ViewIDField {
     }
 
     render = () => {
-        this.viewInit.append(this.select.label)
-        this.viewInit.append(this.select.options)
+        this.viewInit.append(this.label.render())
+        this.viewInit.append(this.select.render())
         return this.viewInit
     }
 }

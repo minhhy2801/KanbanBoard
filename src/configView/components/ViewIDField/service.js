@@ -1,12 +1,16 @@
 
-export const getListViews = () => {
-    let body = { app: kintone.app.getId() }
+import { App } from '@kintone/kintone-js-sdk'
+export const kintoneApp = new App()
+export const appId = kintone.app.getId()
 
-    return kintone.api(kintone.api.url('/k/v1/app/views', true), 'GET', body).then(resp => { return resp.views })
+export const getListViews = () => {
+    return kintoneApp.getViews(appId).then((resp) => {
+        return resp.views
+    })
 }
 
 export const getFormFields = () => {
-    let body = { app: kintone.app.getId() }
-    
-    return kintone.api(kintone.api.url('/k/v1/app/form/fields', true), 'GET', body).then(resp => { return resp.properties })
+    return kintoneApp.getFormFields(appId).then((resp) => {
+        return resp.properties
+    });
 }

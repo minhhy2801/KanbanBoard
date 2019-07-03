@@ -1,14 +1,16 @@
-import TextInput from './ui/Text';
+import { Label, Text } from '@kintone/kintone-ui-component/src/js';
+
 class NumProgressField {
     constructor(valueNumProgress) {
-        this.textEl = new TextInput()
+        this.text = new Text()
+        this.label = new Label()
         this.numProgess = 0
         this.valueNumProgress = valueNumProgress
         this.numProgressInit = document.createElement('div')
 
-        this.textEl.setLabel('Number Of Init Progress (%): ')
+        this.label.setText('Number Of Init Progress (%): ')
         this.setNumProgress()
-        this.textEl.setValue(this.numProgess)
+        this.text.setValue(this.numProgess)
     }
 
     setNumProgress = () => {
@@ -18,12 +20,12 @@ class NumProgressField {
     }
 
     getNumProgress = () => {
-        return this.textEl.getValue()
+        return this.text.element.value
     }
 
     render = () => {
-        this.numProgressInit.append(this.textEl.label)
-        this.numProgressInit.append(this.textEl.inputValue)
+        this.numProgressInit.append(this.label.render())
+        this.numProgressInit.append(this.text.render())
         return this.numProgressInit;
     }
 }

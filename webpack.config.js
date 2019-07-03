@@ -10,9 +10,24 @@ const kanbanViewConfig = {
     module: {
         rules: [
             { test: /\.(js)$/, use: 'babel-loader' },
+            {test: /\.ts?$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env', "@babel/preset-typescript"],
+                        plugins: ["transform-class-properties"]
+                    }
+                }},
             { test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
-    }
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, './public')
+        ]
+    },
 }
 
 const configViewConfig = {
@@ -24,9 +39,24 @@ const configViewConfig = {
     module: {
         rules: [
             { test: /\.(js)$/, use: 'babel-loader' },
+            {test: /\.ts?$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env', "@babel/preset-typescript"],
+                        plugins: ["transform-class-properties"]
+                    }
+                }},
             { test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
-    }
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, './public')
+        ]
+    },
 }
 
 module.exports = [kanbanViewConfig, configViewConfig]

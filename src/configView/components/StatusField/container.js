@@ -1,15 +1,16 @@
-import Select from "../ViewIDField/ui/Select";
 import { getFormFields } from "../ViewIDField/service";
 import { type_drop_down, type_radio_button } from "../../util/config";
+import { Dropdown, Label } from "@kintone/kintone-ui-component/src/js";
 
 class StatusField {
-    constructor(label, valueStatus) {
-        this.select = new Select()
-        this.listStatus = []
+    constructor(valueStatus) {
+        this.label = new Label()
+        this.select = new Dropdown()
         this.statusInit = document.createElement('div')
+        this.listStatus = []
         this.listOptionsOfStatus = []
         this.valueStatus = valueStatus
-        this.select.setLabel(label)
+        this.label.setText('Choose status field:')
         this.setStatusList()
     }
 
@@ -19,13 +20,19 @@ class StatusField {
             if (this.listOptionsOfStatus[key].type == type_drop_down || this.listOptionsOfStatus[key].type == type_radio_button)
                 this.listStatus.push(this.listOptionsOfStatus[key])
         })
+        this.select.innerHTML = ''
 
+        this.listStatus.forEach((opt) => {
+            this.select.addItem({ label: opt.label, value: opt.code });
+        });
 
-        this.select.setTypeOptions(this.listStatus, this.valueStatus)
+        if (typeof this.valueStatus !== 'undefined') {
+            this.select.setValue(this.valueStatus)
+        }
     }
 
-    setSelectedStatus = (value) => {
-        this.select.setSelected(value)
+    setSelected = (value) => {
+        this.select.setValue(value)
     }
 
     getStatus = () => {
@@ -40,16 +47,26 @@ class StatusField {
                 options = status.options
             }
         })
+
         this.listStatus = Object.keys(options).map(key => {
             return options[key]
         });
-        return this.select.getListStatus(this.listStatus)
+
+        let listStatus = []
+        for (let i = 0; i < this.listStatus.length; i++) {
+            this.listStatus.map((opt) => {
+                if (i == opt.index) {
+                    listStatus.push(opt.label)
+                }
+            });
+        }
+
+        return listStatus;
     }
 
     render = () => {
-
-        this.statusInit.append(this.select.label)
-        this.statusInit.append(this.select.options)
+        this.statusInit.append(this.label.render())
+        this.statusInit.append(this.select.render())
         return this.statusInit
     }
 }

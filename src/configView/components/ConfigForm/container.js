@@ -7,13 +7,11 @@ import FirebaseField from '../FirebaseField/container';
 
 class ConfigForm {
     constructor() {
-        console.log(PLUGIN_DATA);
-
         this.numProgessConfig = new NumProgressField(PLUGIN_DATA.numProgess)
 
         this.viewIDConfig = new ViewIDField(PLUGIN_DATA.viewID)
 
-        this.statusConfig = new StatusField('Choose status field: ', PLUGIN_DATA.statusCode)
+        this.statusConfig = new StatusField(PLUGIN_DATA.statusCode)
 
         this.firebaseConfig = new FirebaseField(JSON.parse(PLUGIN_DATA.acceptFirebase), PLUGIN_DATA.apiKeyFirebase,
             PLUGIN_DATA.authDomainFirebase, PLUGIN_DATA.dbUrlFirebase)
@@ -26,6 +24,7 @@ class ConfigForm {
 
     handleSubmit = () => {
         let listStatus = this.statusConfig.getListStatus()
+
         let submitData = {
             viewID: this.viewIDConfig.getViewID(),
             numProgess: this.numProgessConfig.getNumProgress(),
@@ -33,12 +32,11 @@ class ConfigForm {
             listStatus: listStatus.toString(),
             todoField: listStatus[0],
             doneField: listStatus[listStatus.length - 1],
-            acceptFirebase: this.firebaseConfig.getCheckBoxValue() + '',
+            acceptFirebase: this.firebaseConfig.hasUsingFirebase() + '',
             apiKeyFirebase: this.firebaseConfig.getTextApiKey(),
             authDomainFirebase: this.firebaseConfig.getTextAuthDomain(),
             dbUrlFirebase: this.firebaseConfig.getTextDbUrl()
         }
-
         kintone.plugin.app.setConfig(submitData)
     }
 
