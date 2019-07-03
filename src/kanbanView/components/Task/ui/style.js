@@ -9,9 +9,6 @@ let taskStyle = {
 
 let linkDeleteStyle = {
     float: 'right',
-    color: '#aaa',
-    fontSize: '20px',
-    fontWeight: 'bold'
 }
 
 let style = {

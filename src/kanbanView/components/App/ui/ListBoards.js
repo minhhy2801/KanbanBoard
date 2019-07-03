@@ -11,7 +11,6 @@ class ListBoards {
         this.board = []
     }
 
-
     render() {
         let listBoardEl = document.createElement('div');
 
@@ -36,7 +35,6 @@ class ListBoards {
         this.listBoardsDOM = listBoardEl
         return listBoardEl;
     }
-
 }
 
 export default ListBoards;

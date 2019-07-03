@@ -1,7 +1,7 @@
 import { btnNewTaskStyle } from "./style";
-import PlusButton from "./PlusButton";
-import { button_add } from "../../../util/configMessage";
 import { KEY } from "../../../util/config";
+import { IconButton } from "@kintone/kintone-ui-component/src/js";
+import { setStyle } from "../../../util/styleUtil";
 
 let config = kintone.plugin.app.getConfig(KEY);
 
@@ -22,11 +22,12 @@ class Header {
         let headerEl = document.createElement('div');
 
         if (this.stateName === config.todoField) {
-            let btnNewTask = new PlusButton(button_add, btnNewTaskStyle, this.onClickOpenModal);
-
+            let btnNewTask = new IconButton({ type: 'insert' });
+            setStyle(btnNewTask.element, btnNewTaskStyle)
+            btnNewTask.on('click', () => { this.onClickOpenModal() })
             headerEl.append(btnNewTask.render());
         }
-        
+
         this.titleContentEl.textContent = this.stateName + ' (' + this.totalCount + ')';
 
         headerEl.append(this.titleContentEl);

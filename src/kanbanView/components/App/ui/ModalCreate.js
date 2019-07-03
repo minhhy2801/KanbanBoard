@@ -1,56 +1,66 @@
 import { setStyle } from "../../../util/styleUtil";
-import { modalStyle, modalContentStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, closeSpanStyleHover, modalHideStyle, modalShowStyle, btnCreateStyle } from "./style";
-import Button from "./Button";
-import TextInput from "./TextInput";
-import CloseSpan from "./CloseSpan";
-import { span_close, button_submit, button_cancel, title_input_project, title_input_task } from "../../../util/configMessage";
-
+import { modalStyle, btnCancelStyle, closeSpanStyle, inputWidthStyle, btnCreateStyle } from "./style";
+import { button_cancel, button_submit, title_input_project, title_input_task } from "../../../util/configMessage";
+import { Label, Text, Dialog, IconButton, Button } from '@kintone/kintone-ui-component/src/js'
 
 class CreateTaskModal {
-    constructor(title, status, onSumbitTask, closeModal) {
+    constructor(title, status, onSumbitTask) {
         this.title = title;
         this.status = status;
         this.onSumbitTask = onSumbitTask;
-        this.closeModal = closeModal;
-        this.inputProject = new TextInput(inputWidthStyle, title_input_project);
-        this.inputTask = new TextInput(inputWidthStyle, title_input_task);
+        this.inputTaskLabel = new Label()
+        this.inputTaskLabel.setText(title_input_task)
+        this.inputTaskLabel.setRequired(true)
+        this.inputProjectLabel = new Label()
+        this.inputProjectLabel.setText(title_input_project)
+        this.inputProjectLabel.setRequired(true)
+        this.inputProject = new Text()
+        this.inputTask = new Text()
     }
 
     onClickSubmit = () => {
-        this.onSumbitTask(this.inputProject.inputDOM.value, this.inputTask.inputDOM.value, this.closeModal);
+        this.onSumbitTask(this.inputProject.element.value, this.inputTask.element.value);
     }
 
     render() {
-        let modal = document.createElement('div');
-        let modalContent = document.createElement('div');
-        let titleAddTask = document.createElement('h1');
+        let modal = new Dialog()
+        let closeSpan = new IconButton({ type: 'close' })
+        let headerSpan = document.createElement('span')
+        headerSpan.textContent = this.title
+        headerSpan.append(closeSpan.render())
 
-        let closeSpan = new CloseSpan(span_close, closeSpanStyle, closeSpanStyleHover, closeSpanStyleHover, modalHideStyle, modal);
-        let btnCreateTask = new Button(button_submit, this.onClickSubmit, btnCreateStyle);
-        let btnCancelCreateTask = new Button(button_cancel, this.closeModal, btnCancelStyle);
+        modal.setHeader(headerSpan)
 
-        titleAddTask.textContent = this.title;
+        setStyle(headerSpan, modalStyle)
+        setStyle(closeSpan.element, closeSpanStyle)
 
-        window.onclick = (event) => {
-            if (event.target === modal)
-                setStyle(modal, modalHideStyle);
-        }
+        closeSpan.on('click', () => { modal.hide() })
 
-        setStyle(modal, modalStyle);
-        setStyle(modalContent, modalContentStyle);
+        let btnCreateTask = new Button({ text: button_submit, type: 'submit' })
+        btnCreateTask.on('click', () => { this.onClickSubmit() })
 
-        modalContent.append(closeSpan.render());
-        modalContent.append(titleAddTask);
+        let btnCancelCreateTask = new Button({ text: button_cancel });
+        btnCancelCreateTask.on('click', () => { modal.hide() })
+
+        setStyle(btnCancelCreateTask.element, btnCancelStyle)
+        setStyle(btnCreateTask.element, btnCreateStyle)
+        setStyle(this.inputProject.element, inputWidthStyle)
+        setStyle(this.inputTask.element, inputWidthStyle)
+
+        let modalContent = document.createElement('div')
+        modalContent.append(this.inputProjectLabel.render());
         modalContent.append(this.inputProject.render());
+        modalContent.append(this.inputTaskLabel.render());
         modalContent.append(this.inputTask.render());
         modalContent.append(document.createElement('br'));
-        modalContent.append(btnCreateTask.render());
-        modalContent.append(btnCancelCreateTask.render());
+        modal.setContent(modalContent);
+        let modalFooter = document.createElement('div')
+        modalFooter.append(btnCreateTask.render());
+        modalFooter.append(btnCancelCreateTask.render());
+        modal.setFooter(modalFooter)
+        this.modalDOM = modal
 
-        modal.append(modalContent);
-        this.modalDOM = modal;
-
-        return modal;
+        return modal.render()
     }
 
 }

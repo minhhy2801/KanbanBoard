@@ -18,12 +18,7 @@ let listTasksStyle = {
 }
 
 let btnNewTaskStyle = {
-    float: 'right',
-    backgroundColor: 'grey',
-    border: '1px solid white',
-    color: 'white',
-    width: '30px',
-    height: '30px'
+    float: 'right'
 }
 
 let style = {

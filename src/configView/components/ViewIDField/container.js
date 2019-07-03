@@ -1,5 +1,5 @@
-import { getListViews } from "./service";
 import { Dropdown, Label } from '@kintone/kintone-ui-component/src/js'
+import { getListViews } from '../../util/service';
 
 class ViewIDField {
     constructor(valueView) {

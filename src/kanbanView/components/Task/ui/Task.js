@@ -1,7 +1,6 @@
 import { setStyle } from "../../../util/styleUtil";
 import { taskStyle, linkDeleteStyle } from "./style";
-import { span_close } from "../../../util/configMessage";
-
+import { IconButton } from "@kintone/kintone-ui-component/src/js";
 class Task {
     constructor(numProgress, projectTitle, taskTitle, id, header, processDeleteTask, setDragBoard, setHeader) {
         this.numProgress = numProgress;
@@ -15,19 +14,18 @@ class Task {
     }
 
     render() {
+        let taskSpan = document.createElement('span')
         let taskEl = document.createElement('div');
-        let linkDelete = document.createElement('a');
-
-        setStyle(taskEl, taskStyle);
-
+        let btnDelete = new IconButton({ type: 'close', color: 'red', size: 'small' })
         taskEl.id = this.id;
-        taskEl.innerText = '[' + this.numProgress + '%] Project Name: ' +
+        taskSpan.innerText = '[' + this.numProgress + '%] Project Name: ' +
             this.projectTitle + '\n Task Name(' + this.id + '): ' +
             this.taskTitle + '\n';
 
         taskEl.onclick = () => {
             window.open('/k/2/show#record=' + this.id);
         };
+        btnDelete.on('click', () => { this.processDeleteTask() })
 
         taskEl.addEventListener('dragstart', async (event) => {
             window.draggingTask = this;
@@ -35,16 +33,11 @@ class Task {
         })
 
         taskEl.draggable = true;
-        setStyle(linkDelete, linkDeleteStyle);
+        setStyle(taskEl, taskStyle);
+        setStyle(btnDelete.element, linkDeleteStyle);
 
-        linkDelete.textContent = span_close;
-
-        linkDelete.onclick = () => {
-            this.processDeleteTask();
-        }
-
-        taskEl.append(document.createElement('br'));
-        taskEl.append(linkDelete);
+        taskEl.append(btnDelete.render());
+        taskEl.append(taskSpan)
         this.taskDOM = taskEl;
         return taskEl;
     }

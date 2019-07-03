@@ -13,8 +13,6 @@ let configFirebase = {
 
 firebase.initializeApp(configFirebase);
 
-
-
 kintone.events.on('app.record.index.show', (e) => {
     if (e.viewId == config.viewID) {
         let arr = config.listStatus.split(",")

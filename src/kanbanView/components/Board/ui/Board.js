@@ -54,8 +54,6 @@ class Board {
 
             delete window.draggingTask;
             delete window.dragBoard;
-
-            this.rerender();
         });
 
         this.boardDOM = board;

@@ -2,8 +2,6 @@ import Board from './ui/Board';
 import { getRecordByIdFromAPI, updateStatusFromAPI } from './service';
 import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, KEY } from '../../util/config';
 import CreateTaskModal from '../App/ui/ModalCreate';
-import { setStyle } from '../../util/styleUtil';
-import { modalShowStyle, modalHideStyle } from '../App/ui/style';
 import { getRecordsByStatus } from '../../service';
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -24,20 +22,12 @@ class BoardContainer {
         window.dragBoard = this;
     }
 
-    isVisible = (isVisible) => {
-        if (isVisible) {
-            setStyle(this.modal.modalDOM, modalShowStyle);
-        } else {
-            setStyle(this.modal.modalDOM, modalHideStyle);
-        }
-    }
-
     openCreateModal = () => {
         if (!this.modal) {
-            this.modal = new CreateTaskModal('Add New Task', this.header, this.createTask, this.isVisible);
-            document.getElementById('app').appendChild(this.modal.render());
+            this.modal = new CreateTaskModal('Add New Task', this.header, this.createTask);
+            document.getElementById('app').append(this.modal.render());
         }
-        this.isVisible(true);
+        this.modal.modalDOM.show()
     }
 
     setTotalRecords = async () => {

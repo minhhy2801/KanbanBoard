@@ -1,6 +1,6 @@
 import ListBoards from './ui/ListBoards'
 import { createTaskFromAPI } from './service';
-import Message from '../commonComponents/Message';
+import Message from '../Common/Message';
 import { message_success, title_message_success, text_message_add_success, title_message_fail, text_message_add_fail, message_error, button_close } from '../../util/configMessage';
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -82,13 +82,11 @@ class ListBoardContainer {
         return taskData;
     }
 
-    createTask = async (inputProject, inputTask, closeModal) => {
+    createTask = async (inputProject, inputTask) => {
         try {
             let id = await createTaskFromAPI(inputProject, inputTask);
             let msg = new Message(title_message_success, text_message_add_success, message_success, button_close, false).render();
-
             msg.then(val => {
-                closeModal();
                 if (window.firebase) {
                     this.writeNewTask(id, inputProject, inputTask)
                 } else {

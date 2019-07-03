@@ -1,6 +1,6 @@
-import { getFormFields } from "../ViewIDField/service";
 import { type_drop_down, type_radio_button } from "../../util/config";
 import { Dropdown, Label } from "@kintone/kintone-ui-component/src/js";
+import { getFormFields } from "../../util/service";
 
 class StatusField {
     constructor(valueStatus) {

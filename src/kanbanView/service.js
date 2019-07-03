@@ -1,8 +1,15 @@
+
+import { App, Record } from '@kintone/kintone-js-sdk'
 import { rb_StatusField } from "./util/config";
+
+export const kintoneApp = new App()
+export const kintoneRecord = new Record()
+export const appId = kintone.app.getId()
+
+
 
 export const createQueryForGetTasksByStatus = (status) => `${rb_StatusField} in ("${status}")`;
 
 export const getRecordsByStatus = (status) => {
-    let body = { app: kintone.app.getId(), query: createQueryForGetTasksByStatus(status), totalCount: true };
-    return kintone.api(kintone.api.url('/k/v1/records', true), 'GET', body);
+    return kintoneRecord.getRecords(appId, createQueryForGetTasksByStatus(status), [], true)
 };
