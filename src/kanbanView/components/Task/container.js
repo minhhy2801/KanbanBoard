@@ -1,5 +1,5 @@
 import Task from './ui/Task'
-import { title_message_confirm, text_message_confirm_delete, message_warning, text_message_delete_success, message_success, button_cancel, button_delete } from '../../util/configMessage';
+import { title_message_confirm, text_message_confirm_delete, text_message_delete_success, message_success, button_cancel, button_delete } from '../../util/configMessage';
 import { deleteTaskFromAPI } from './service';
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -18,31 +18,33 @@ class TaskContainer {
         this.setHeader = setHeader;
 
         this.task = new Task(numProgress, projectTitle, taskTitle, id,
-            header, this.processDeleteTask, setDragBoard, setHeader);
+            header, this.processDeleteTask, setDragBoard, setHeader)
+        this.dialogConfirm = new Dialog()
+        this.btnDelete = new Button({ text: button_delete, type: 'submit' })
+        this.btnCancel = new Button({ text: button_cancel })
+
     }
 
     processDeleteTask = () => {
         window.event.stopImmediatePropagation();
-        // let msgConfirm = new Message(title_message_confirm, text_message_confirm_delete, message_warning, true, true).render();
-        let dialogConfirm = new Dialog()
-        let btnDelete = new Button({ text: button_delete, type: 'submit' })
-        let btnCancel = new Button({ text: button_cancel })
+
         let modalFooter = document.createElement('div')
         modalFooter.append(btnDelete.render());
         modalFooter.append(btnCancel.render());
         setStyle(btnDelete.element, floatLeft)
 
-        dialogConfirm.setHeader(title_message_confirm)
-        dialogConfirm.setContent(text_message_confirm_delete)
-        dialogConfirm.setFooter(modalFooter)
-        btnCancel.on('click', () => { dialogConfirm.hide() })
+        this.dialogConfirm.setHeader(title_message_confirm)
+        this.dialogConfirm.setContent(text_message_confirm_delete)
+        this.dialogConfirm.setFooter(modalFooter)
 
-        btnDelete.on('click', () => {
+        this.btnCancel.on('click', () => { this.dialogConfirm.hide() })
+
+        this.btnDelete.on('click', () => {
             this.onClickDeleteBtn()
-            dialogConfirm.hide()
+            this.dialogConfirm.hide()
         })
 
-        document.getElementById('app').append(dialogConfirm.render())
+        document.getElementById('app').append(this.dialogConfirm.render())
     }
 
     onClickDeleteBtn = () => {

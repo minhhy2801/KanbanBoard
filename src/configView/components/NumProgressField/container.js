@@ -1,6 +1,4 @@
 import { Label, Text } from '@kintone/kintone-ui-component/src/js';
-import { inputWidthStyle } from '../../util/config';
-import { setStyle } from '../../util/styleUtil';
 
 class NumProgressField {
     constructor(valueNumProgress) {

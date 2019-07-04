@@ -9,11 +9,11 @@ class ListTasks {
         this.header = header;
         this.setDragBoard = setDragBoard;
         this.setHeader = setHeader;
+        this.listTasksEl = document.createElement('div')
     }
 
     render() {
-        let listTasks = document.createElement('div');
-        setStyle(listTasks, listTasksStyle);
+        setStyle(this.listTasksEl, listTasksStyle);
 
         this.listTasks.forEach(objTask => {
             let task = {}
@@ -24,9 +24,10 @@ class ListTasks {
                 task = new TaskContainer(objTask.num_progress.value, objTask.txt_projectTitle.value,
                     objTask.txt_taskTitle.value, objTask.$id.value, this.header, this.setDragBoard, this.setHeader);
             }
-            listTasks.append(task.render());
+            this.listTasksEl.append(task.render());
         });
-        return listTasks;
+
+        return this.listTasksEl;
     }
 }
 

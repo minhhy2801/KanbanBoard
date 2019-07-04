@@ -6,7 +6,6 @@ export const getRecordByIdFromAPI = (recordId) => {
 }
 
 export const updateStatusFromAPI = (recordId, projecTitle, taskTitle, status, numProgress, description, userCode) => {
-
     let record = {
         [text_ProjectField]: { value: projecTitle },
         [text_TaskField]: { value: taskTitle },

@@ -18,7 +18,7 @@ class ListBoardContainer {
             this.writeListTasks()
             this.getListTasks()
         } else {
-            this.listBoardsApp = new ListBoards(this.listBoards, this.triggerModal, this.status, this.createTask, this.onDragStart);
+            this.listBoardsApp = new ListBoards(this.listBoards, this.triggerModal, this.status, this.createTask);
         }
 
     }
@@ -45,30 +45,6 @@ class ListBoardContainer {
         }
     }
 
-    getListTasks = () => {
-        let map = {}
-        let tasks = []
-        let ref = firebase.database().ref(`app/${kintone.app.getId()}/tasks/`);
-        ref.on("value", (resp) => {
-            this.status.forEach((state) => {
-                resp.forEach(item => {
-                    if (item.val().status == state) {
-                        tasks.push(item.val())
-                    }
-
-                });
-                map[state] = tasks
-                tasks = []
-            })
-            this.listBoards = Object.keys(map).map(key => {
-                return map[key];
-            })
-            this.listBoardsApp = new ListBoards(this.listBoards, this.triggerModal, this.status, this.createTask, this.onDragStart).render();
-            document.getElementById('app').innerHTML = ''
-            document.getElementById('app').append(this.listBoardsApp);
-        });
-    }
-
     writeNewTask = (id, projectTitle, taskTitle) => {
         let taskData = {
             id: id,
@@ -82,6 +58,27 @@ class ListBoardContainer {
         return taskData;
     }
 
+    getListTasks = () => {
+        let map = {}
+        let tasks = []
+        let ref = firebase.database().ref(`app/${kintone.app.getId()}/tasks/`);
+        ref.on("value", (resp) => {
+            this.status.forEach((state) => {
+                resp.forEach(item => {
+                    if (item.val().status == state) tasks.push(item.val())
+                })
+
+                map[state] = tasks
+                tasks = []
+            })
+
+            this.listBoards = Object.keys(map).map(key => { return map[key]; })
+            this.listBoardsApp = new ListBoards(this.listBoards, this.triggerModal, this.status, this.createTask).render();
+            document.getElementById('app').innerHTML = ''
+            document.getElementById('app').append(this.listBoardsApp);
+        });
+    }
+    
     createTask = async (inputProject, inputTask) => {
         let body = document.getElementsByTagName("body")[0];
         try {
@@ -94,20 +91,15 @@ class ListBoardContainer {
             } else {
                 window.location.reload(true);
             }
-
-
         } catch (error) {
             let msg = new NotifyPopup({ text: title_message_fail, type: message_error })
             body.append(msg.render())
         }
-
     }
 
     render() {
         return this.listBoardsApp.render();
     }
-
-
 }
 
 export default ListBoardContainer;

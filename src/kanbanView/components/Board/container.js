@@ -40,10 +40,6 @@ class BoardContainer {
         }
     }
 
-    rerender() {
-        this.board.rerender && this.board.rerender()
-    }
-
     updateStatusHeader = async (recordId) => {
         try {
             let record = await getRecordByIdFromAPI(recordId);
@@ -83,6 +79,10 @@ class BoardContainer {
         };
 
         firebase.database().ref(`app/${kintone.app.getId()}/tasks/${id}`).update(taskData)
+    }
+
+    rerender() {
+        this.board.rerender && this.board.rerender()
     }
 
     render() {

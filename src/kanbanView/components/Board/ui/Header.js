@@ -32,8 +32,6 @@ class Header {
         this.titleContentEl.textContent = this.stateName + ' (' + this.totalCount + ')';
 
         headerEl.append(this.titleContentEl);
-        // headerEl.append(document.createElement('hr'));
-
         return headerEl;
     }
 }

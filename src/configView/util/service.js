@@ -1,5 +1,5 @@
-
 import { App } from '@kintone/kintone-js-sdk'
+
 export const kintoneApp = new App()
 export const appId = kintone.app.getId()
 
