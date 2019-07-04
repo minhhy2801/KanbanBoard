@@ -1,4 +1,6 @@
 import { Label, Text, CheckBox } from "@kintone/kintone-ui-component/src/js";
+import { inputWidthStyle } from "../../util/config";
+import { setStyle } from "../../util/styleUtil";
 
 class FirebaseField {
     constructor(acceptFirebase, apiKeyFirebase, authDomainFirebase, dbUrlFirebase) {
@@ -71,6 +73,10 @@ class FirebaseField {
     }
 
     render = () => {
+        setStyle(this.textApiKey.element, inputWidthStyle)
+        setStyle(this.textAuthDomain.element, inputWidthStyle)
+        setStyle(this.textDbUrl.element, inputWidthStyle)
+
         this.firebaseInt.append(this.checkBoxLabel.render())
         this.firebaseInt.append(this.checkBox.render())
         this.firebaseInt.append(this.textApiKeyLabel.render())
