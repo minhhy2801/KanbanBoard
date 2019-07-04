@@ -1,5 +1,5 @@
 import { setStyle } from "../../../util/styleUtil";
-import { taskStyle, linkDeleteStyle } from "./style";
+import { taskStyle, linkDeleteStyle, taskHoverStyle, taskDropStyle, taskDragStyle } from "./style";
 import { IconButton } from "@kintone/kintone-ui-component/src/js";
 class Task {
     constructor(numProgress, projectTitle, taskTitle, id, header, processDeleteTask, setDragBoard, setHeader) {
@@ -19,8 +19,8 @@ class Task {
         let btnDelete = new IconButton({ type: 'close', color: 'red', size: 'small' })
         taskEl.id = this.id;
         taskSpan.innerText = '[' + this.numProgress + '%] Project Name: ' +
-            this.projectTitle + '\n Task Name(' + this.id + '): ' +
-            this.taskTitle + '\n';
+            this.projectTitle + '\nTask Name (' + this.id + '): ' +
+            this.taskTitle;
 
         taskEl.onclick = () => {
             window.open('/k/2/show#record=' + this.id);
@@ -31,6 +31,13 @@ class Task {
             window.draggingTask = this;
             this.setDragBoard();
         })
+
+        taskEl.ondragstart = () => {
+            setStyle(taskEl, taskDragStyle);
+        }
+        taskEl.ondragend = () => {
+            setStyle(taskEl, taskDropStyle);
+        }
 
         taskEl.draggable = true;
         setStyle(taskEl, taskStyle);

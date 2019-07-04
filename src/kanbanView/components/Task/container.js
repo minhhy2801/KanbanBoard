@@ -1,5 +1,4 @@
 import Task from './ui/Task'
-import Message from '../Common/Message';
 import { title_message_confirm, text_message_confirm_delete, message_warning, text_message_delete_success, message_success, button_cancel, button_delete } from '../../util/configMessage';
 import { deleteTaskFromAPI } from './service';
 import * as firebase from 'firebase/app'
@@ -32,6 +31,7 @@ class TaskContainer {
         modalFooter.append(btnDelete.render());
         modalFooter.append(btnCancel.render());
         setStyle(btnDelete.element, floatLeft)
+
         dialogConfirm.setHeader(title_message_confirm)
         dialogConfirm.setContent(text_message_confirm_delete)
         dialogConfirm.setFooter(modalFooter)

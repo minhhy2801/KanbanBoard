@@ -1,7 +1,6 @@
 import ListBoards from './ui/ListBoards'
 import { createTaskFromAPI } from './service';
-import Message from '../Common/Message';
-import { message_success, title_message_success, text_message_add_success, title_message_fail, text_message_add_fail, message_error, button_close } from '../../util/configMessage';
+import { message_success, text_message_add_success, title_message_fail, message_error } from '../../util/configMessage';
 import * as firebase from 'firebase/app'
 import 'firebase/database'
 import { KEY, text_ProjectField, text_TaskField, num_ProgressField, rb_StatusField } from '../../util/config';

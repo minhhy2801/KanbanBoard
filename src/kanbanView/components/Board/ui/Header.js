@@ -1,4 +1,4 @@
-import { btnNewTaskStyle } from "./style";
+import { btnNewTaskStyle, headerStyle, divHeaderStyle } from "./style";
 import { KEY } from "../../../util/config";
 import { IconButton } from "@kintone/kintone-ui-component/src/js";
 import { setStyle } from "../../../util/styleUtil";
@@ -27,11 +27,12 @@ class Header {
             btnNewTask.on('click', () => { this.onClickOpenModal() })
             headerEl.append(btnNewTask.render());
         }
-
+        setStyle(this.titleContentEl, headerStyle)
+        setStyle(headerEl, divHeaderStyle)
         this.titleContentEl.textContent = this.stateName + ' (' + this.totalCount + ')';
 
         headerEl.append(this.titleContentEl);
-        headerEl.append(document.createElement('hr'));
+        // headerEl.append(document.createElement('hr'));
 
         return headerEl;
     }
