@@ -8,7 +8,7 @@ class CreateTaskModal {
         this.title = title;
         this.status = status;
         this.onSumbitTask = onSumbitTask;
-        this, modal = new Dialog()
+        this.modal = new Dialog()
         this.inputTaskLabel = new Label()
         this.inputProjectLabel = new Label()
         this.inputProject = new Text()
@@ -63,7 +63,7 @@ class CreateTaskModal {
         this.modal.setFooter(modalFooter)
 
         this.modalDOM = this.modal
-        return modal.render()
+        return this.modal.render()
     }
 
 }

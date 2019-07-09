@@ -29,9 +29,9 @@ class TaskContainer {
         window.event.stopImmediatePropagation();
 
         let modalFooter = document.createElement('div')
-        modalFooter.append(btnDelete.render());
-        modalFooter.append(btnCancel.render());
-        setStyle(btnDelete.element, floatLeft)
+        modalFooter.append(this.btnDelete.render());
+        modalFooter.append(this.btnCancel.render());
+        setStyle(this.btnDelete.element, floatLeft)
 
         this.dialogConfirm.setHeader(title_message_confirm)
         this.dialogConfirm.setContent(text_message_confirm_delete)
