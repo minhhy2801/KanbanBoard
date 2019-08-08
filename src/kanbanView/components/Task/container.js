@@ -6,16 +6,16 @@ import { setStyle } from '../../util/styleUtil';
 import { floatLeft } from './ui/style';
 
 class TaskContainer {
-    constructor(numProgress, projectTitle, taskTitle, id, header, setDragBoard, setHeader) {
-        this.numProgress = numProgress;
+    constructor(assigneeUser, teamName, projectTitle, taskTitle, id, header, setDragBoard, setHeader) {
+        this.teamName = teamName
+        this.assigneeUser = assigneeUser
         this.projectTitle = projectTitle;
         this.taskTitle = taskTitle;
         this.id = id;
         this.header = header;
         this.setDragBoard = setDragBoard;
         this.setHeader = setHeader;
-
-        this.task = new Task(numProgress, projectTitle, taskTitle, id,
+        this.task = new Task(this.assigneeUser, this.teamName, projectTitle, taskTitle, id,
             header, this.processDeleteTask, setDragBoard, setHeader)
         this.dialogConfirm = new Dialog()
         this.btnDelete = new Button({ text: button_delete, type: 'submit' })

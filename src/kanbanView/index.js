@@ -1,7 +1,6 @@
 import { getRecordsByStatus } from './service';
 import ListBoardContainer from './components/App/container';
-
-const config = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID)
+import { config } from './util/config';
 
 kintone.events.on('app.record.index.show', (e) => {
     if (e.viewId == config.viewID) {

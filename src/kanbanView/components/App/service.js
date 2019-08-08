@@ -1,16 +1,14 @@
-import { DESCRIPTION_INIT, rb_StatusField, text_ProjectField, text_TaskField, num_ProgressField, rich_DescriptionField, assignee_SelectField, KEY } from "../../util/config";
+import { DESCRIPTION_INIT, text_ProjectField, text_TaskField, rich_DescriptionField, config } from "../../util/config";
 import { kintoneRecord, appId } from "../../service";
 
-const config = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID);
 
 export const createTaskFromAPI = (projectTitle, taskTitle) => {
     let record = {
         [text_ProjectField]: { value: projectTitle },
         [text_TaskField]: { value: taskTitle },
-        [rb_StatusField]: { value: config.todoField },
-        [num_ProgressField]: { value: config.numProgess },
+        [config.statusCode]: { value: config.todoField },
         [rich_DescriptionField]: { value: DESCRIPTION_INIT },
-        [assignee_SelectField]: { value: [{ code: kintone.getLoginUser().code }] }
+        [config.assigneeField]: { value: [{ code: kintone.getLoginUser().code }] }
     }
     return kintoneRecord.addRecord(appId, record).then(resp => { return resp.id })
 }

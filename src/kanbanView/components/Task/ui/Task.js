@@ -1,10 +1,11 @@
 import { setStyle } from "../../../util/styleUtil";
-import { taskStyle, linkDeleteStyle, taskDropStyle, taskDragStyle } from "./style";
+import { taskStyleVN, linkDeleteStyle, taskDropStyle, taskDragStyle, taskStyleJA, taskStyleZH, taskStyleOther, taskStyleDefault } from "./style";
 import { IconButton } from "@kintone/kintone-ui-component/src/js";
 
 class Task {
-    constructor(numProgress, projectTitle, taskTitle, id, header, processDeleteTask, setDragBoard, setHeader) {
-        this.numProgress = numProgress;
+    constructor(assigneeUser, teamName, projectTitle, taskTitle, id, header, processDeleteTask, setDragBoard, setHeader) {
+        this.teamName = teamName;
+        this.assigneeUser = assigneeUser;
         this.projectTitle = projectTitle;
         this.taskTitle = taskTitle;
         this.id = id;
@@ -15,13 +16,17 @@ class Task {
     }
 
     render() {
-        let taskSpan = document.createElement('span')
+        let taskSpan = document.createElement('pre')
         let taskEl = document.createElement('div');
         let btnDelete = new IconButton({ type: 'close', color: 'red', size: 'small' })
         taskEl.id = this.id;
-        taskSpan.innerText = '[' + this.numProgress + '%] Project Name: ' +
-            this.projectTitle + '\nTask Name (' + this.id + '): ' +
-            this.taskTitle;
+        this.assigneeUser = this.assigneeUser.map(i => {
+            return i.name;
+        })
+        
+        taskSpan.textContent = '[' + this.teamName + '] \nProject Name: ' +
+            this.projectTitle + '\nTask Name: ' +
+            this.taskTitle + '\nAssignee: ' + this.assigneeUser;
 
         taskEl.onclick = () => {
             window.open('/k/2/show#record=' + this.id);
@@ -41,7 +46,20 @@ class Task {
         }
 
         taskEl.draggable = true;
-        setStyle(taskEl, taskStyle);
+        let teamName = JSON.stringify(this.teamName).toLowerCase()
+        if (teamName.includes('vn')) {
+            setStyle(taskEl, taskStyleVN);
+        } else if (teamName.includes('ja')) {
+            setStyle(taskEl, taskStyleJA);
+        } else if (teamName.includes('zh')) {
+            setStyle(taskEl, taskStyleZH);
+        }
+        if (this.teamName.length > 1) {
+            setStyle(taskEl, taskStyleOther)
+        }
+        if (this.teamName.length < 1) {
+            setStyle(taskEl, taskStyleDefault)
+        }
         setStyle(btnDelete.element, linkDeleteStyle);
 
         taskEl.append(btnDelete.render());
