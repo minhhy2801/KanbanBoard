@@ -2,8 +2,8 @@ import ConfigFormEl from './ui/ConfigFormEl';
 import NumProgressField from '../NumProgressField/container';
 import ViewIDField from '../ViewIDField/container';
 import StatusField from '../StatusField/container';
-import { PLUGIN_DATA } from '../../util/config';
-import FirebaseField from '../FirebaseField/container';
+
+const PLUGIN_DATA = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID)
 
 class ConfigForm {
     constructor() {
@@ -12,13 +12,9 @@ class ConfigForm {
         this.viewIDConfig = new ViewIDField(PLUGIN_DATA.viewID)
 
         this.statusConfig = new StatusField(PLUGIN_DATA.statusCode)
-
-        this.firebaseConfig = new FirebaseField(JSON.parse(PLUGIN_DATA.acceptFirebase), PLUGIN_DATA.apiKeyFirebase,
-            PLUGIN_DATA.authDomainFirebase, PLUGIN_DATA.dbUrlFirebase)
-
         this.formEl = new ConfigFormEl([
             this.viewIDConfig.render(), this.numProgessConfig.render(),
-            this.statusConfig.render(), this.firebaseConfig.render()
+            this.statusConfig.render(), 
         ], this.handleSubmit)
     }
 
@@ -32,11 +28,9 @@ class ConfigForm {
             listStatus: listStatus.toString(),
             todoField: listStatus[0],
             doneField: listStatus[listStatus.length - 1],
-            acceptFirebase: this.firebaseConfig.hasUsingFirebase() + '',
-            apiKeyFirebase: this.firebaseConfig.getTextApiKey(),
-            authDomainFirebase: this.firebaseConfig.getTextAuthDomain(),
-            dbUrlFirebase: this.firebaseConfig.getTextDbUrl()
         }
+        console.log(submitData);
+        
         kintone.plugin.app.setConfig(submitData)
     }
 

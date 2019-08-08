@@ -3,14 +3,12 @@ import { getRecordByIdFromAPI, updateStatusFromAPI } from './service';
 import { NUM_PROGRESS_DONE, NUM_PROGRESS_RESET_DONE, KEY } from '../../util/config';
 import CreateTaskModal from '../App/ui/ModalCreate';
 import { getRecordsByStatus } from '../../service';
-import * as firebase from 'firebase/app'
-import 'firebase/database'
 
-let config = kintone.plugin.app.getConfig(KEY);
+const config = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID);
 
 class BoardContainer {
     constructor(listTasks, header, modal, createTask) {
-        this.listTasks = listTasks;
+        this.listTasks = listTasks.records;
         this.header = header;
         this.modal = modal;
         this.createTask = createTask;
@@ -32,7 +30,9 @@ class BoardContainer {
 
     setTotalRecords = async () => {
         try {
+            
             let records = await getRecordsByStatus(this.header);
+            console.log(this.board);
             this.board.setTotal(parseInt(records.totalCount));
             this.board.setTaskList(records.records);
         } catch (error) {
@@ -57,28 +57,11 @@ class BoardContainer {
 
             await updateStatusFromAPI(recordId, record.txt_projectTitle.value, record.txt_taskTitle.value, status,
                 numProgress, record.rich_text_description.value, record.user_selection_assignee.value[0].code);
-
-            if (window.firebase) {
-                this.updatestatusOnFirebase(recordId, status, record.txt_projectTitle.value, record.txt_taskTitle.value, numProgress)
-            }
-
             await this.setTotalRecords();
 
         } catch (error) {
             console.log(error);
         }
-    }
-
-    updatestatusOnFirebase = (id, status, projectTitle, taskTitle, numProgess) => {
-        let taskData = {
-            id: id,
-            projectTitle: projectTitle,
-            taskTitle: taskTitle,
-            numProgress: numProgess,
-            status: status
-        };
-
-        firebase.database().ref(`app/${kintone.app.getId()}/tasks/${id}`).update(taskData)
     }
 
     rerender() {

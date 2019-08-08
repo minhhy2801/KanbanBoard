@@ -1,6 +1,7 @@
 import { setStyle } from "../../../util/styleUtil";
 import { taskStyle, linkDeleteStyle, taskDropStyle, taskDragStyle } from "./style";
 import { IconButton } from "@kintone/kintone-ui-component/src/js";
+
 class Task {
     constructor(numProgress, projectTitle, taskTitle, id, header, processDeleteTask, setDragBoard, setHeader) {
         this.numProgress = numProgress;

@@ -1,12 +1,12 @@
 import { btnNewTaskStyle, headerStyle, divHeaderStyle } from "./style";
-import { KEY } from "../../../util/config";
 import { IconButton } from "@kintone/kintone-ui-component/src/js";
 import { setStyle } from "../../../util/styleUtil";
 
-let config = kintone.plugin.app.getConfig(KEY);
+const config = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID);
 
 class Header {
     constructor(totalCount, stateName, onClickOpenModal) {
+        
         this.totalCount = totalCount;
         this.stateName = stateName;
         this.onClickOpenModal = onClickOpenModal;

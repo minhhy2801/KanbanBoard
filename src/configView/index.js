@@ -4,5 +4,5 @@ const form = new ConfigFrom()
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const formContainer = document.getElementById('kanban_config')
-    formContainer.appendChild(form.render())
+    formContainer.append(form.render())
 }, false);

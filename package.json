@@ -13,7 +13,6 @@
   "dependencies": {
     "@kintone/kintone-js-sdk": "^0.3.2",
     "@kintone/kintone-ui-component": "^0.3.2",
-    "firebase": "^6.2.4",
     "local-web-server": "^3.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

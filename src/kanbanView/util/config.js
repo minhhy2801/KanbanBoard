@@ -1,6 +1,3 @@
-export const KEY = 'gklclcfiblkpbelmjiacehdlagciiohb'
-
-
 export const VIEW_ES6_ID = 2062;
 
 export const LIST_STATUS = ["Todo", "Implement", "Testing", "Done"];

@@ -9,5 +9,7 @@ export const appId = kintone.app.getId()
 export const createQueryForGetTasksByStatus = (status) => `${rb_StatusField} in ("${status}")`;
 
 export const getRecordsByStatus = (status) => {
-    return kintoneRecord.getRecords(appId, createQueryForGetTasksByStatus(status), [], true)
+    return kintoneRecord.getAllRecordsByQuery(appId, createQueryForGetTasksByStatus(status), [], true).then((rsp) => {
+        return rsp
+    })
 };

@@ -1,7 +1,7 @@
 import { DESCRIPTION_INIT, rb_StatusField, text_ProjectField, text_TaskField, num_ProgressField, rich_DescriptionField, assignee_SelectField, KEY } from "../../util/config";
 import { kintoneRecord, appId } from "../../service";
 
-let config = kintone.plugin.app.getConfig(KEY);
+const config = kintone.plugin.app.getConfig(kintone.$PLUGIN_ID);
 
 export const createTaskFromAPI = (projectTitle, taskTitle) => {
     let record = {

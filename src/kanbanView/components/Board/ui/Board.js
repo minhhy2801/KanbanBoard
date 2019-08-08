@@ -13,11 +13,9 @@ class Board {
         this.totalCount = this.listTasks.length;
         this.setTotalRecords = setTotalRecords;
         this.setDragBoard = setDragBoard
-
         this.listTasksComponent = new ListTasks(this.listTasks, this.header, this.setDragBoard, this.setHeader);
         this.boardDOM = null
     }
-
 
     setTotal = (totalCount) => {
         this.headerComponent.setTotalCount(totalCount);
@@ -53,8 +51,8 @@ class Board {
 
             delete window.draggingTask;
             delete window.dragBoard;
+            this.rerender();
         });
-
         this.boardDOM = board;
         this.rerender();
         return board;
