@@ -12,10 +12,13 @@
     "desktop": {
         "js": [
             "https://unpkg.com/sweetalert/dist/sweetalert.min.js",
-            "https://PC-001567-1.local:8000/dist/js/plugin.js"]
+            "js/plugin.js"
+        ]
     },
     "config": {
         "html": "html/config.html",
-        "js": ["https://PC-001567-1.local:8000/dist/js/config.js"]
+        "js": [
+            "js/config.js"
+        ]
     }
 }

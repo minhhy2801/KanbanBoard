@@ -1,6 +1,6 @@
 import Task from './ui/Task'
 import { title_message_confirm, text_message_confirm_delete, text_message_delete_success, message_success, button_cancel, button_delete } from '../../util/configMessage';
-import { deleteTaskFromAPI } from './service';
+import { deleteTaskFromAPI, getUserByCode } from './service';
 import { Dialog, Button, NotifyPopup } from '@kintone/kintone-ui-component/src/js';
 import { setStyle } from '../../util/styleUtil';
 import { floatLeft } from './ui/style';
@@ -15,11 +15,30 @@ class TaskContainer {
         this.header = header;
         this.setDragBoard = setDragBoard;
         this.setHeader = setHeader;
-        this.task = new Task(this.assigneeUser, this.teamName, projectTitle, taskTitle, id,
+        // this.avatarList = this.handleAssigneeUser()
+        this.task = new Task(this.avatarList, this.teamName, projectTitle, taskTitle, id,
             header, this.processDeleteTask, setDragBoard, setHeader)
+        this.handleAssigneeUser().then(resp => {
+            this.task.setAvaList(resp)
+        })
         this.dialogConfirm = new Dialog()
         this.btnDelete = new Button({ text: button_delete, type: 'submit' })
         this.btnCancel = new Button({ text: button_cancel })
+    }
+
+    handleAssigneeUser = async () => {
+        try {
+            let listUser = this.assigneeUser.map(item => {
+                return item.code
+            })
+            let listUserId = await getUserByCode(listUser);
+            this.avatarList = listUserId.map(item => {
+                return { img: 'https://bozuman.cybozu.com/api/user/photo.do/-/user.png?id=' + item.id, name: item.name };
+            })
+            return this.avatarList;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     processDeleteTask = () => {
@@ -56,7 +75,6 @@ class TaskContainer {
         this.taskContainerDOM = this.task;
         return this.task.render();
     }
-
 }
 
 export default TaskContainer;

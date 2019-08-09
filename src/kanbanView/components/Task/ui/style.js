@@ -65,7 +65,47 @@ let linkDeleteStyle = {
 let floatLeft = {
     float: 'left',
 }
+
+let avaStyle = {
+    width: '36px',
+    height: '36px',
+    display: 'inline-block',
+    float: 'right',
+    margin: '1px',
+    position: 'relative'
+}
+
+let teamStyle = {
+    width: '36px',
+    height: '36px',
+    display: 'inline-block',
+    borderRadius: '50%',
+    overflow: 'hidden',
+    float: 'left',
+    backgroundColor: '#d9d9d9',
+    color: 'black',
+    textAlign: 'center',
+    lineHeight: '36px',
+    margin: '1px'
+}
+
+let tooltipStyle = {
+    backgroundColor: '#555',
+    color: '#fff',
+    textAlign: 'center',
+    borderRadius: '6px',
+    padding: '2px 5px',
+    position: 'absolute',
+    bottom: '125%',
+    left: '50%',
+    marginLeft: '-50%',
+    transition: 'opacity 0.3s'
+}
+
 let style = {
+    tooltipStyle: tooltipStyle,
+    teamStyle: teamStyle,
+    avaStyle: avaStyle,
     taskStyleVN: taskStyleVN,
     taskStyleJA: taskStyleJA,
     taskStyleZH: taskStyleZH,
@@ -76,4 +116,4 @@ let style = {
 }
 
 export default style;
-export { taskStyleVN, taskStyleJA, taskStyleDefault, taskStyleZH, taskStyleOther, linkDeleteStyle, floatLeft, taskDragStyle, taskDropStyle };
+export { tooltipStyle, teamStyle, taskStyleVN, avaStyle, taskStyleJA, taskStyleDefault, taskStyleZH, taskStyleOther, linkDeleteStyle, floatLeft, taskDragStyle, taskDropStyle };

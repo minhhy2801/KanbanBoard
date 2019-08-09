@@ -1,6 +1,7 @@
 import { setStyle } from "../../../util/styleUtil";
 import { listBoardsStyle } from "./style";
 import BoardContainer from "../../Board/container";
+import { config } from "../../../util/config";
 
 class ListBoards {
     constructor(listBoards, triggerModal, status, createTask) {
@@ -14,7 +15,6 @@ class ListBoards {
 
     render = () => {
         setStyle(this.listBoardEl, listBoardsStyle)
-
         this.status.forEach((state, index) => {
             let board = new BoardContainer(this.listBoards[index], state, this.triggerModal, this.createTask)
             this.listBoardEl.append(board.render())
